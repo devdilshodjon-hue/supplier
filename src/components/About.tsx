@@ -1,12 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Users, Award, Clock, Globe } from 'lucide-react';
 
 const About: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [counts, setCounts] = useState({ clients: 0, projects: 0, experience: 0, countries: 0 });
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const finalCounts = { clients: 50, projects: 100, experience: 5, countries: 15 };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      const duration = 2000; // 2 seconds
+      const steps = 60;
+      const stepDuration = duration / steps;
+
+      let currentStep = 0;
+      const timer = setInterval(() => {
+        currentStep++;
+        const progress = currentStep / steps;
+        
+        setCounts({
+          clients: Math.floor(finalCounts.clients * progress),
+          projects: Math.floor(finalCounts.projects * progress),
+          experience: Math.floor(finalCounts.experience * progress),
+          countries: Math.floor(finalCounts.countries * progress)
+        });
+
+        if (currentStep >= steps) {
+          clearInterval(timer);
+          setCounts(finalCounts);
+        }
+      }, stepDuration);
+
+      return () => clearInterval(timer);
+    }
+  }, [isVisible]);
+
   const stats = [
-    { icon: Users, number: '50+', label: 'Mamnun Mijozlar' },
-    { icon: Award, number: '100+', label: 'Tugallangan Loyihalar' },
-    { icon: Clock, number: '5+', label: 'Yillik Tajriba' },
-    { icon: Globe, number: '15+', label: 'Xizmat Ko\'rsatilgan Mamlakatlar' },
+    { icon: Users, number: counts.clients, suffix: '+', label: 'Mamnun Mijozlar', color: 'blue' },
+    { icon: Award, number: counts.projects, suffix: '+', label: 'Tugallangan Loyihalar', color: 'green' },
+    { icon: Clock, number: counts.experience, suffix: '+', label: 'Yillik Tajriba', color: 'purple' },
+    { icon: Globe, number: counts.countries, suffix: '+', label: 'Xizmat Ko\'rsatilgan Mamlakatlar', color: 'pink' },
   ];
 
   const team = [
@@ -36,31 +87,72 @@ const About: React.FC = () => {
     },
   ];
 
+  const getColorClasses = (color: string) => {
+    const colors = {
+      blue: 'from-blue-500 to-blue-600',
+      green: 'from-green-500 to-green-600',
+      purple: 'from-purple-500 to-purple-600',
+      pink: 'from-pink-500 to-pink-600'
+    };
+    return colors[color as keyof typeof colors];
+  };
+
   return (
-    <section id="about" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden" ref={sectionRef}>
+      {/* Background Animation */}
+      <div className="absolute inset-0">
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-blue-100 rounded-full opacity-30 animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${3 + Math.random() * 4}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Supplier IT Haqida
+        <div className="text-center mb-20">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-fade-in-up">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Supplier IT
+            </span>{' '}
+            Haqida
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
             Biz ajoyib raqamli tajribalar yaratishga bag'ishlangan ishtiyoqli dasturchilar va dizaynerlar jamoasimiz. 
             O'zbekistonda joylashgan bo'lib, butun dunyo bo'ylab mijozlarga innovatsion texnologik yechimlar taqdim etamiz.
           </p>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+        {/* Animated Stats */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
+              className="group text-center cursor-pointer transform hover:scale-110 transition-all duration-500"
+              style={{ animationDelay: `${index * 0.2}s` }}
             >
-              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <stat.icon className="w-12 h-12 text-blue-600 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</h3>
-                <p className="text-gray-600">{stat.label}</p>
+              <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                {/* Animated background gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${getColorClasses(stat.color)} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                
+                <div className="relative z-10">
+                  <div className="relative mb-6">
+                    <stat.icon className="w-16 h-16 text-blue-600 mx-auto group-hover:scale-125 group-hover:rotate-12 transition-all duration-500" />
+                    <div className="absolute inset-0 bg-blue-600/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-ping"></div>
+                  </div>
+                  
+                  <h3 className="text-5xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                    {stat.number}{stat.suffix}
+                  </h3>
+                  <p className="text-gray-600 font-medium text-lg">{stat.label}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -68,25 +160,57 @@ const About: React.FC = () => {
 
         {/* Team Section */}
         <div>
-          <h3 className="text-2xl font-bold text-center text-gray-900 mb-12">Bizning Mutaxassis Jamoamiz</h3>
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-16 animate-fade-in-up">
+            Bizning{' '}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Mutaxassis Jamoamiz
+            </span>
+          </h3>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((member, index) => (
               <div 
                 key={index}
-                className="group cursor-pointer transform hover:scale-105 transition-all duration-300"
+                className="group cursor-pointer transform hover:scale-105 transition-all duration-500"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                  <div className="relative mb-6">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-24 h-24 rounded-full mx-auto object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 rounded-full bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 text-center relative overflow-hidden">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="relative mb-6">
+                      <div className="relative">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-28 h-28 rounded-full mx-auto object-cover group-hover:scale-110 transition-transform duration-500 shadow-lg"
+                        />
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      </div>
+                      
+                      {/* Floating particles around image */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        {[...Array(8)].map((_, i) => (
+                          <div
+                            key={i}
+                            className="absolute w-2 h-2 bg-blue-400 rounded-full animate-ping"
+                            style={{
+                              left: `${20 + Math.random() * 60}%`,
+                              top: `${20 + Math.random() * 60}%`,
+                              animationDelay: `${i * 0.2}s`,
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                      {member.name}
+                    </h4>
+                    <p className="text-blue-600 font-semibold mb-2">{member.role}</p>
+                    <p className="text-sm text-gray-600">{member.expertise}</p>
                   </div>
-                  <h4 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h4>
-                  <p className="text-blue-600 font-medium mb-2">{member.role}</p>
-                  <p className="text-sm text-gray-600">{member.expertise}</p>
                 </div>
               </div>
             ))}

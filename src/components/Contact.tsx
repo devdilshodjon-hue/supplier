@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 
 const Contact: React.FC = () => {
@@ -11,6 +11,25 @@ const Contact: React.FC = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -24,7 +43,7 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate form submission
+    // Simulate form submission with animation
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     setIsLoading(false);
@@ -40,19 +59,22 @@ const Contact: React.FC = () => {
       icon: Mail,
       title: 'Email Yuboring',
       details: 'dev.dilshodjon@gmail.com',
-      description: 'Istalgan vaqtda email yuboring!'
+      description: 'Istalgan vaqtda email yuboring!',
+      color: 'blue'
     },
     {
       icon: Phone,
       title: 'Qo\'ng\'iroq Qiling',
       details: '+998 99 534 03 13',
-      description: 'Dush-Jum 9:00 dan 18:00 gacha'
+      description: 'Dush-Jum 9:00 dan 18:00 gacha',
+      color: 'green'
     },
     {
       icon: MapPin,
       title: 'Bizni Ziyorat Qiling',
       details: 'Toshkent, O\'zbekiston',
-      description: 'Ofisimizga tashrif buyuring'
+      description: 'Ofisimizga tashrif buyuring',
+      color: 'purple'
     }
   ];
 
@@ -65,66 +87,113 @@ const Contact: React.FC = () => {
     'Boshqa'
   ];
 
+  const getColorClasses = (color: string) => {
+    const colors = {
+      blue: 'from-blue-500 to-blue-600',
+      green: 'from-green-500 to-green-600',
+      purple: 'from-purple-500 to-purple-600'
+    };
+    return colors[color as keyof typeof colors];
+  };
+
   return (
-    <section id="contact" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Bog\'laning
+    <section id="contact" className="py-20 bg-gradient-to-br from-white to-gray-50 relative overflow-hidden" ref={sectionRef}>
+      {/* Background Animation */}
+      <div className="absolute inset-0">
+        {[...Array(60)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-blue-200 rounded-full opacity-30 animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${2 + Math.random() * 3}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-fade-in-up">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Bog'laning
+            </span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
             Loyihangizni boshlashga tayyormisiz? G\'oyalaringizni hayotga tatbiq etishda qanday yordam bera olishimizni muhokama qilaylik.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Information */}
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-8">Suhbatni Boshlaylik</h3>
+          <div className={`transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
+            <h3 className="text-3xl font-bold text-gray-900 mb-12">Suhbatni Boshlaylik</h3>
             
-            <div className="space-y-6 mb-8">
+            <div className="space-y-8 mb-12">
               {contactInfo.map((info, index) => (
                 <div 
                   key={index}
-                  className="flex items-start space-x-4 group cursor-pointer p-4 rounded-lg hover:bg-blue-50 transition-colors duration-300"
+                  className="group flex items-start space-x-6 p-6 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-500 cursor-pointer transform hover:scale-105"
+                  style={{ animationDelay: `${index * 0.2}s` }}
                 >
-                  <div className="flex-shrink-0">
-                    <info.icon className="w-6 h-6 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
+                  <div className={`flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br ${getColorClasses(info.color)} group-hover:scale-110 transition-transform duration-500`}>
+                    <info.icon className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-1">{info.title}</h4>
-                    <p className="text-blue-600 font-medium mb-1">{info.details}</p>
-                    <p className="text-gray-600 text-sm">{info.description}</p>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                      {info.title}
+                    </h4>
+                    <p className="text-blue-600 font-semibold mb-2 text-lg">{info.details}</p>
+                    <p className="text-gray-600">{info.description}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8">
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Nega Supplier IT ni Tanlash Kerak?</h4>
-              <ul className="space-y-3">
-                {[
-                  '5+ yillik tajribaga ega mutaxassis jamoa',
-                  'Zamonaviy texnologiyalar va eng yaxshi amaliyotlar',
-                  'Raqobatbardosh narxlar va tez yetkazib berish',
-                  '24/7 qo\'llab-quvvatlash va texnik xizmat',
-                  'Biznes ehtiyojlaringiz uchun maxsus yechimlar'
-                ].map((benefit, index) => (
-                  <li key={index} className="flex items-center text-gray-700">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                    {benefit}
-                  </li>
+            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 relative overflow-hidden">
+              {/* Animated background elements */}
+              <div className="absolute inset-0">
+                {[...Array(10)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-2 h-2 bg-blue-300 rounded-full opacity-30 animate-float"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                      animationDelay: `${Math.random() * 3}s`,
+                    }}
+                  />
                 ))}
-              </ul>
+              </div>
+              
+              <div className="relative z-10">
+                <h4 className="text-2xl font-bold text-gray-900 mb-6">Nega Supplier IT ni Tanlash Kerak?</h4>
+                <ul className="space-y-4">
+                  {[
+                    '5+ yillik tajribaga ega mutaxassis jamoa',
+                    'Zamonaviy texnologiyalar va eng yaxshi amaliyotlar',
+                    'Raqobatbardosh narxlar va tez yetkazib berish',
+                    '24/7 qo\'llab-quvvatlash va texnik xizmat',
+                    'Biznes ehtiyojlaringiz uchun maxsus yechimlar'
+                  ].map((benefit, index) => (
+                    <li key={index} className="flex items-center text-gray-700 group">
+                      <CheckCircle className="w-6 h-6 text-green-500 mr-4 flex-shrink-0 group-hover:scale-125 transition-transform duration-300" />
+                      <span className="group-hover:translate-x-2 transition-transform duration-300">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div className="relative">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          <div className={`relative transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
+            <form onSubmit={handleSubmit} className="space-y-8 bg-white rounded-3xl p-8 shadow-xl">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="group">
+                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-3">
                     To'liq Ism *
                   </label>
                   <input
@@ -134,12 +203,12 @@ const Contact: React.FC = () => {
                     required
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 group-hover:border-blue-300"
                     placeholder="Sizning to'liq ismingiz"
                   />
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <div className="group">
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-3">
                     Email Manzil *
                   </label>
                   <input
@@ -149,15 +218,15 @@ const Contact: React.FC = () => {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 group-hover:border-blue-300"
                     placeholder="sizning@email.com"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="group">
+                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-3">
                     Telefon Raqam
                   </label>
                   <input
@@ -166,12 +235,12 @@ const Contact: React.FC = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 group-hover:border-blue-300"
                     placeholder="+998 99 534 03 13"
                   />
                 </div>
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                <div className="group">
+                  <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-3">
                     Mavzu *
                   </label>
                   <select
@@ -180,7 +249,7 @@ const Contact: React.FC = () => {
                     required
                     value={formData.subject}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 group-hover:border-blue-300"
                   >
                     <option value="">Xizmatni tanlang</option>
                     {subjects.map((subject, index) => (
@@ -190,8 +259,8 @@ const Contact: React.FC = () => {
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+              <div className="group">
+                <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-3">
                   Xabar *
                 </label>
                 <textarea
@@ -201,7 +270,7 @@ const Contact: React.FC = () => {
                   rows={6}
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
+                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 resize-none group-hover:border-blue-300"
                   placeholder="Loyihangiz haqida bizga ayting..."
                 />
               </div>
@@ -209,26 +278,29 @@ const Contact: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-5 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-500 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 shadow-xl hover:shadow-2xl relative overflow-hidden group"
               >
                 {isLoading ? (
-                  <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="w-8 h-8 border-3 border-white border-t-transparent rounded-full animate-spin" />
                 ) : (
                   <>
-                    <Send className="w-5 h-5" />
+                    <Send className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
                     <span>Xabar Yuborish</span>
                   </>
                 )}
+                
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </button>
             </form>
 
             {/* Success Message */}
             {isSubmitted && (
-              <div className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-lg flex items-center justify-center">
+              <div className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-3xl flex items-center justify-center animate-fade-in-up">
                 <div className="text-center p-8">
-                  <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4 animate-bounce" />
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Xabar Yuborildi!</h3>
-                  <p className="text-gray-600">Xabaringiz uchun rahmat. Tez orada siz bilan bog'lanamiz!</p>
+                  <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-6 animate-bounce" />
+                  <h3 className="text-3xl font-bold text-gray-900 mb-4">Xabar Yuborildi!</h3>
+                  <p className="text-xl text-gray-600">Xabaringiz uchun rahmat. Tez orada siz bilan bog'lanamiz!</p>
                 </div>
               </div>
             )}

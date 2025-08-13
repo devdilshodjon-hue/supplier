@@ -4,10 +4,28 @@ import { Menu, X, Bot } from 'lucide-react';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      // Detect active section
+      const sections = ['hero', 'about', 'services', 'portfolio', 'contact', 'blog'];
+      const scrollPosition = window.scrollY + 100;
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetBottom = offsetTop + element.offsetHeight;
+          
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -22,53 +40,62 @@ const Header = () => {
     }
   };
 
+  const isHeroSection = activeSection === 'hero';
+  const textColor = isHeroSection ? 'text-white' : 'text-gray-900';
+  const logoColor = isHeroSection ? 'text-white' : 'text-blue-600';
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      isScrolled && !isHeroSection ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => scrollToSection('home')}>
-            <Bot className="w-8 h-8 text-blue-600" />
-            <span className="text-xl font-bold text-gray-900">Supplier IT</span>
+          <div 
+            className="flex items-center space-x-2 cursor-pointer transform hover:scale-105 transition-all duration-300" 
+            onClick={() => scrollToSection('hero')}
+          >
+            <Bot className={`w-8 h-8 transition-all duration-500 ${logoColor} hover:rotate-12`} />
+            <span className={`text-xl font-bold transition-all duration-500 ${textColor}`}>
+              Supplier IT
+            </span>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             <button
-              onClick={() => scrollToSection('home')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+              onClick={() => scrollToSection('hero')}
+              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
             >
               Bosh sahifa
             </button>
             <button
               onClick={() => scrollToSection('about')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
             >
               Biz haqimizda
             </button>
             <button
               onClick={() => scrollToSection('services')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
             >
               Xizmatlar
             </button>
             <button
               onClick={() => scrollToSection('portfolio')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
             >
               Portfolio
             </button>
             <button
               onClick={() => scrollToSection('blog')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
             >
               Blog
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-200 font-medium"
+              className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 font-medium transform hover:scale-105 hover:shadow-lg"
             >
               Bog'lanish
             </button>
@@ -76,54 +103,54 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 transform hover:scale-110 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700" />
+              <X className={`w-6 h-6 transition-all duration-300 ${textColor}`} />
             ) : (
-              <Menu className="w-6 h-6 text-gray-700" />
+              <Menu className={`w-6 h-6 transition-all duration-300 ${textColor}`} />
             )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200 py-4 animate-fadeIn">
+          <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 py-4 animate-fade-in-up rounded-b-2xl shadow-xl">
             <nav className="flex flex-col space-y-4">
               <button
-                onClick={() => scrollToSection('home')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-4 py-2"
+                onClick={() => scrollToSection('hero')}
+                className="text-left text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2"
               >
                 Bosh sahifa
               </button>
               <button
                 onClick={() => scrollToSection('about')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-4 py-2"
+                className="text-left text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2"
               >
                 Biz haqimizda
               </button>
               <button
                 onClick={() => scrollToSection('services')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-4 py-2"
+                className="text-left text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2"
               >
                 Xizmatlar
               </button>
               <button
                 onClick={() => scrollToSection('portfolio')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-4 py-2"
+                className="text-left text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2"
               >
                 Portfolio
               </button>
               <button
                 onClick={() => scrollToSection('blog')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-4 py-2"
+                className="text-left text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2"
               >
                 Blog
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
-                className="text-left bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors duration-200 font-medium mx-4"
+                className="text-left bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 font-medium mx-4 transform hover:scale-105 shadow-lg"
               >
                 Bog'lanish
               </button>
