@@ -145,15 +145,39 @@ const Contact: React.FC = () => {
             
             <div className="space-y-8 mb-12">
               {contactInfo.map((info, index) => (
-                <div 
+                <div
                   key={index}
-                  className={`group flex items-start space-x-6 p-6 rounded-2xl hover:shadow-xl transition-all duration-500 cursor-pointer transform hover:scale-105 ${
+                  className={`group flex items-start space-x-6 p-6 rounded-2xl hover:shadow-xl transition-all duration-500 cursor-pointer transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                     isDark ? 'hover:bg-gray-800' : 'hover:bg-white'
                   }`}
                   style={{ animationDelay: `${index * 0.2}s` }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${info.title}: ${info.details}. ${info.description}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      // Handle click action for contact info
+                      if (info.details.includes('@')) {
+                        window.location.href = `mailto:${info.details}`;
+                      } else if (info.details.includes('+')) {
+                        window.location.href = `tel:${info.details.replace(/\s/g, '')}`;
+                      }
+                    }
+                  }}
+                  onClick={() => {
+                    if (info.details.includes('@')) {
+                      window.location.href = `mailto:${info.details}`;
+                    } else if (info.details.includes('+')) {
+                      window.location.href = `tel:${info.details.replace(/\s/g, '')}`;
+                    }
+                  }}
                 >
-                  <div className={`flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br ${getColorClasses(info.color)} group-hover:scale-110 transition-transform duration-500`}>
-                    <info.icon className="w-8 h-8 text-white" />
+                  <div
+                    className={`flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br ${getColorClasses(info.color)} group-hover:scale-110 transition-transform duration-500`}
+                    aria-hidden="true"
+                  >
+                    <info.icon className="w-8 h-8 text-white" aria-hidden="true" />
                   </div>
                   <div>
                     <h4 className={`${typography.cardTitle} ${textColors.primary} mb-2 group-hover:text-blue-600 transition-colors duration-300`}>
@@ -208,7 +232,12 @@ const Contact: React.FC = () => {
 
           {/* Contact Form */}
           <div className={`relative transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
-            <form onSubmit={handleSubmit} className="space-y-8 bg-white rounded-3xl p-8 shadow-xl">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-8 bg-white rounded-3xl p-8 shadow-xl"
+              aria-label="Bog'lanish formasi"
+              noValidate
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="group">
                   <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-3">
@@ -223,7 +252,10 @@ const Contact: React.FC = () => {
                     onChange={handleInputChange}
                     className={getInputStyles(isDark)}
                     placeholder="Sizning to'liq ismingiz"
+                    aria-describedby="name-help"
+                    autoComplete="name"
                   />
+                  <span id="name-help" className="sr-only">To'liq ismingizni kiriting</span>
                 </div>
                 <div className="group">
                   <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-3">
@@ -238,7 +270,10 @@ const Contact: React.FC = () => {
                     onChange={handleInputChange}
                     className={getInputStyles(isDark)}
                     placeholder="sizning@email.com"
+                    aria-describedby="email-help"
+                    autoComplete="email"
                   />
+                  <span id="email-help" className="sr-only">Haqiqiy email manzilini kiriting</span>
                 </div>
               </div>
 
