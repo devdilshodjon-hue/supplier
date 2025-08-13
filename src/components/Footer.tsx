@@ -83,7 +83,7 @@ const Footer: React.FC = () => {
                   <button
                     onClick={() => scrollToSection(link.href)}
                     className={`${typography.footerText} transition-colors duration-300 hover:translate-x-1 transform inline-block ${
-                      isDark ? 'text-gray-400 hover:text-white' : 'text-gray-300 hover:text-gray-100'
+                      isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-800'
                     }`}
                   >
                     {link.label}
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
               {services.map((service, index) => (
                 <li key={index}>
                   <span className={`${typography.footerText} transition-colors duration-300 cursor-pointer hover:translate-x-1 transform inline-block ${
-                    isDark ? 'text-gray-400 hover:text-white' : 'text-gray-300 hover:text-gray-100'
+                    isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-800'
                   }`}>
                     {service}
                   </span>
