@@ -1,7 +1,12 @@
 import React from 'react';
 import { Calendar, User, ArrowRight, Clock } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+import { typography, getTextColors } from '../utils/typography';
 
 const Blog: React.FC = () => {
+  const { isDark } = useTheme();
+  const textColors = getTextColors(isDark);
+
   const blogPosts = [
     {
       id: 1,
