@@ -35,6 +35,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEOOptimizer
+        title="Supplier IT - Professional Veb Dasturlash, Mobil Ilovalar va Telegram Botlar"
+        description="Supplier IT - O'zbekistondagi yetakchi IT kompaniya. Professional veb-sayt dasturlash, iOS va Android uchun mobil ilovalar, maxsus Telegram botlar."
+        keywords="veb dasturlash, mobil ilovalar, telegram botlar, iOS, Android, IT xizmatlar, O'zbekiston, Toshkent"
+        canonicalUrl="https://supplier.uz/"
+      />
       <Header />
       <Hero />
       <LazySection>
