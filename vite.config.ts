@@ -1,36 +1,15 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { splitVendorChunkPlugin } from 'vite'
-import { visualizer } from 'rollup-plugin-visualizer'
-import { compress } from 'vite-plugin-compress'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react({
-      jsxRuntime: 'automatic',
-      babel: {
-        plugins: [
-          ['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }]
-        ]
-      }
+      jsxRuntime: 'automatic'
     }),
-    splitVendorChunkPlugin(),
-    // Compression for better performance
-    compress({
-      gzip: true,
-      brotli: true,
-      algorithm: 'gzip',
-      exclude: [/\.(png|jpg|jpeg|webp|avif|gif|svg)$/]
-    }),
-    // Bundle analyzer (only in analyze mode)
-    process.env.ANALYZE && visualizer({
-      filename: 'dist/bundle-analysis.html',
-      open: true,
-      gzipSize: true,
-      brotliSize: true
-    })
-  ].filter(Boolean),
+    splitVendorChunkPlugin()
+  ],
   build: {
     target: 'es2015',
     // Enable code splitting for better performance
