@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
               <span className={`${typography.navLarge} font-bold`}>Supplier IT</span>
             </div>
             <p className={`${typography.body} mb-6 leading-relaxed ${
-              isDark ? 'text-gray-400' : 'text-gray-600'
+              isDark ? 'text-gray-400' : 'text-blue-100'
             }`}>
               G'oyalarni zamonaviy texnologiyalar va innovatsion yechimlar bilan raqamli haqiqatga aylantiramiz. 
               Veb dasturlash, mobil ilovalar va avtomatlashtirish sohasidagi ishonchli hamkoringiz.
@@ -63,8 +63,8 @@ const Footer: React.FC = () => {
                 <a
                   key={index}
                   href={social.href}
-                  className={`p-3 rounded-full hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 ${
-                    isDark ? 'bg-gray-800' : 'bg-gray-200 hover:bg-blue-600'
+                  className={`p-3 rounded-full transition-all duration-300 transform hover:scale-110 ${
+                    isDark ? 'bg-gray-800 hover:bg-blue-600' : 'bg-blue-500 hover:bg-blue-400'
                   }`}
                   aria-label={social.label}
                 >
@@ -83,7 +83,7 @@ const Footer: React.FC = () => {
                   <button
                     onClick={() => scrollToSection(link.href)}
                     className={`${typography.footerText} transition-colors duration-300 hover:translate-x-1 transform inline-block ${
-                      isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-800'
+                      isDark ? 'text-gray-400 hover:text-white' : 'text-blue-200 hover:text-white'
                     }`}
                   >
                     {link.label}
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
               {services.map((service, index) => (
                 <li key={index}>
                   <span className={`${typography.footerText} transition-colors duration-300 cursor-pointer hover:translate-x-1 transform inline-block ${
-                    isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-800'
+                    isDark ? 'text-gray-400 hover:text-white' : 'text-blue-200 hover:text-white'
                   }`}>
                     {service}
                   </span>
