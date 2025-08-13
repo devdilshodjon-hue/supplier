@@ -31,15 +31,49 @@ const Header = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (isMenuOpen && !target.closest('#mobile-menu') && !target.closest('[data-mobile-toggle]')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMenuOpen]);
+
+  // Handle escape key
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isMenuOpen]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsMenuOpen(false);
+      // Announce navigation to screen readers
+      const announcement = `${sectionId === 'hero' ? 'Bosh sahifa' : sectionId} qismiga o'tildi`;
+      const liveRegion = document.createElement('div');
+      liveRegion.setAttribute('aria-live', 'polite');
+      liveRegion.setAttribute('aria-atomic', 'true');
+      liveRegion.className = 'sr-only';
+      liveRegion.textContent = announcement;
+      document.body.appendChild(liveRegion);
+      setTimeout(() => document.body.removeChild(liveRegion), 1000);
     }
   };
 
@@ -50,6 +84,14 @@ const Header = () => {
     ? (isDark ? 'bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-700' : 'bg-white/95 backdrop-blur-md shadow-lg')
     : 'bg-transparent';
 
+  const navigationItems = [
+    { id: 'hero', label: 'Bosh sahifa' },
+    { id: 'about', label: 'Biz haqimizda' },
+    { id: 'services', label: 'Xizmatlar' },
+    { id: 'portfolio', label: 'Portfolio' },
+    { id: 'blog', label: 'Blog' },
+  ];
+
   return (
     <header
       role="banner"
@@ -59,7 +101,7 @@ const Header = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div
-            className="flex items-center space-x-2 cursor-pointer transform hover:scale-105 transition-all duration-300"
+            className="flex items-center space-x-2 cursor-pointer transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-1"
             onClick={() => scrollToSection('hero')}
             role="button"
             tabIndex={0}
@@ -71,7 +113,7 @@ const Header = () => {
               }
             }}
           >
-            <Bot className={`w-8 h-8 transition-all duration-500 ${logoColor} hover:rotate-12`} />
+            <Bot className={`w-8 h-8 transition-all duration-500 ${logoColor} hover:rotate-12`} aria-hidden="true" />
             <span className={`text-xl font-bold transition-all duration-500 ${textColor}`}>
               Supplier IT
             </span>
@@ -80,42 +122,25 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             <nav className="flex space-x-8" role="navigation" aria-label="Asosiy navigatsiya">
-            <button
-              onClick={() => scrollToSection('hero')}
-              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
-            >
-              Bosh sahifa
-            </button>
-            <button
-              onClick={() => scrollToSection('about')}
-              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
-            >
-              Biz haqimizda
-            </button>
-            <button
-              onClick={() => scrollToSection('services')}
-              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
-            >
-              Xizmatlar
-            </button>
-            <button
-              onClick={() => scrollToSection('portfolio')}
-              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
-            >
-              Portfolio
-            </button>
-            <button
-              onClick={() => scrollToSection('blog')}
-              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
-            >
-              Blog
-            </button>
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 font-medium transform hover:scale-105 hover:shadow-lg"
-            >
-              Bog'lanish
-            </button>
+              {navigationItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`transition-all duration-300 font-medium hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1 ${textColor} hover:text-blue-400 ${
+                    activeSection === item.id ? 'text-blue-400' : ''
+                  }`}
+                  aria-current={activeSection === item.id ? 'page' : undefined}
+                >
+                  {item.label}
+                </button>
+              ))}
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 font-medium transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                aria-label="Bog'lanish qismiga o'tish"
+              >
+                Bog'lanish
+              </button>
             </nav>
             <ThemeToggle />
           </div>
@@ -124,18 +149,19 @@ const Header = () => {
           <div className="md:hidden flex items-center space-x-3">
             <ThemeToggle />
             <button
-            className="md:hidden p-2 transform hover:scale-110 transition-all duration-300"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-menu"
-            aria-label={isMenuOpen ? "Menyuni yopish" : "Menyuni ochish"}
-          >
-            {isMenuOpen ? (
-              <X className={`w-6 h-6 transition-all duration-300 ${textColor}`} />
-            ) : (
-              <Menu className={`w-6 h-6 transition-all duration-300 ${textColor}`} />
-            )}
-          </button>
+              data-mobile-toggle
+              className="md:hidden p-2 transform hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMenuOpen ? "Menyuni yopish" : "Menyuni ochish"}
+            >
+              {isMenuOpen ? (
+                <X className={`w-6 h-6 transition-all duration-300 ${textColor}`} aria-hidden="true" />
+              ) : (
+                <Menu className={`w-6 h-6 transition-all duration-300 ${textColor}`} aria-hidden="true" />
+              )}
+            </button>
           </div>
         </div>
 
@@ -150,54 +176,25 @@ const Header = () => {
             aria-label="Mobil navigatsiya"
           >
             <nav className="flex flex-col space-y-4">
-              <button
-                onClick={() => scrollToSection('hero')}
-                className={`text-left transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2 ${
-                  activeSection === 'hero' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600'
-                }`}
-              >
-                Bosh sahifa
-                {activeSection === 'hero' && <span className="ml-2 text-blue-400">●</span>}
-              </button>
-              <button
-                onClick={() => scrollToSection('about')}
-                className={`text-left transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2 ${
-                  activeSection === 'about' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600'
-                }`}
-              >
-                Biz haqimizda
-                {activeSection === 'about' && <span className="ml-2 text-blue-400">●</span>}
-              </button>
-              <button
-                onClick={() => scrollToSection('services')}
-                className={`text-left transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2 ${
-                  activeSection === 'services' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600'
-                }`}
-              >
-                Xizmatlar
-                {activeSection === 'services' && <span className="ml-2 text-blue-400">●</span>}
-              </button>
-              <button
-                onClick={() => scrollToSection('portfolio')}
-                className={`text-left transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2 ${
-                  activeSection === 'portfolio' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600'
-                }`}
-              >
-                Portfolio
-                {activeSection === 'portfolio' && <span className="ml-2 text-blue-400">●</span>}
-              </button>
-              <button
-                onClick={() => scrollToSection('blog')}
-                className={`text-left transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2 ${
-                  activeSection === 'blog' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600'
-                }`}
-              >
-                Blog
-                {activeSection === 'blog' && <span className="ml-2 text-blue-400">●</span>}
-              </button>
+              {navigationItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`text-left transition-all duration-300 font-medium px-4 py-2 rounded-lg transform hover:translate-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                    activeSection === item.id 
+                      ? `text-blue-600 ${isDark ? 'bg-blue-900/30' : 'bg-blue-50'}` 
+                      : `${isDark ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'}`
+                  }`}
+                  aria-current={activeSection === item.id ? 'page' : undefined}
+                >
+                  {item.label}
+                  {activeSection === item.id && <span className="ml-2 text-blue-400" aria-hidden="true">●</span>}
+                </button>
+              ))}
               <button
                 onClick={() => scrollToSection('contact')}
-                className="text-left bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 font-medium mx-4 transform hover:scale-105 shadow-lg"
+                className="text-left bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 font-medium mx-4 transform hover:scale-105 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                aria-label="Bog'lanish qismiga o'tish"
               >
                 Bog'lanish
               </button>
@@ -205,6 +202,14 @@ const Header = () => {
           </div>
         )}
       </div>
+      
+      {/* Skip to main content link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        Asosiy kontentga o'tish
+      </a>
     </header>
   );
 };
