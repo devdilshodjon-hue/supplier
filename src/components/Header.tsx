@@ -44,8 +44,11 @@ const Header = () => {
   };
 
   const isHeroSection = activeSection === 'hero';
-  const textColor = isHeroSection ? 'text-white' : 'text-gray-900';
+  const textColor = isHeroSection ? 'text-white' : (isDark ? 'text-white' : 'text-gray-900');
   const logoColor = isHeroSection ? 'text-white' : 'text-blue-600';
+  const headerBg = isScrolled && !isHeroSection
+    ? (isDark ? 'bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-700' : 'bg-white/95 backdrop-blur-md shadow-lg')
+    : 'bg-transparent';
 
   return (
     <header
