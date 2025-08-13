@@ -107,17 +107,20 @@ const Contact: React.FC = () => {
     }`} ref={sectionRef}>
       {/* Background Animation */}
       <div className="absolute inset-0">
-        {[...Array(60)].map((_, i) => (
+        {[...Array(30)].map((_, i) => (
           <div
             key={i}
             className={`absolute w-1 h-1 rounded-full opacity-30 animate-pulse ${
               isDark ? 'bg-blue-400' : 'bg-blue-200'
             }`}
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
+              left: `${(i * 3.5) % 100}%`,
+              top: `${(i * 5.5) % 100}%`,
+              animationDelay: `${(i * 0.1) % 2}s`,
+              animationDuration: '3s',
+              willChange: 'opacity',
+              backfaceVisibility: 'hidden',
+              transform: 'translateZ(0)'
             }}
           />
         ))}
