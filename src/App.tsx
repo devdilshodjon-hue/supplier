@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import LoadingScreen from './components/LoadingScreen';
 import LazySection from './components/LazySection';
+import { usePerformanceOptimization } from './hooks/usePerformance';
 
 // Lazy load non-critical components
 const About = lazy(() => import('./components/About'));
