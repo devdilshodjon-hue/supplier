@@ -52,22 +52,24 @@ const Blog: React.FC = () => {
 
   const getCategoryColor = (category: string) => {
     const colors = {
-      'Veb Dasturlash': 'bg-blue-100 text-blue-700',
-      'Mobil Dasturlash': 'bg-green-100 text-green-700',
-      'Bot Dasturlash': 'bg-purple-100 text-purple-700',
-      'Dizayn': 'bg-pink-100 text-pink-700'
+      'Veb Dasturlash': isDark ? 'bg-blue-900 text-blue-300' : 'bg-blue-100 text-blue-700',
+      'Mobil Dasturlash': isDark ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-700',
+      'Bot Dasturlash': isDark ? 'bg-purple-900 text-purple-300' : 'bg-purple-100 text-purple-700',
+      'Dizayn': isDark ? 'bg-pink-900 text-pink-300' : 'bg-pink-100 text-pink-700'
     };
-    return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-700';
+    return colors[category as keyof typeof colors] || (isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700');
   };
 
   return (
-    <section id="blog" className="py-20 bg-gray-50">
+    <section id="blog" className={`py-20 transition-colors duration-300 ${
+      isDark ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gray-50'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className={`${typography.h1} ${textColors.primary} mb-4`}>
             So'nggi Ma'lumotlar
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className={`${typography.bodyLarge} ${textColors.secondary} max-w-3xl mx-auto`}>
             Texnologiya va dasturlash dunyosidagi eng so\'nggi trendlar, maslahatlar va ma\'lumotlar bilan yangilanib turing.
           </p>
         </div>
@@ -75,7 +77,9 @@ const Blog: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
           {/* Featured Post */}
           <div className="md:col-span-2 lg:col-span-1">
-            <article className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 group cursor-pointer h-full">
+            <article className={`rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 group cursor-pointer h-full ${
+              isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+            }`}>
               <div className="relative overflow-hidden">
                 <img
                   src={blogPosts[0].image}
@@ -89,10 +93,10 @@ const Blog: React.FC = () => {
                 </div>
               </div>
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                <h3 className={`${typography.cardTitle} ${textColors.primary} mb-4 group-hover:text-blue-600 transition-colors duration-300`}>
                   {blogPosts[0].title}
                 </h3>
-                <p className="text-gray-600 mb-6 text-lg leading-relaxed">
+                <p className={`${typography.cardSubtitle} ${textColors.secondary} mb-6 leading-relaxed`}>
                   {blogPosts[0].excerpt}
                 </p>
                 <div className="flex items-center justify-between">
