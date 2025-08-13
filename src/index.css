@@ -152,9 +152,38 @@
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling and performance */
 html {
   scroll-behavior: smooth;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Performance optimizations for poor performance */
+.reduce-animations .animate-pulse {
+  animation: none;
+}
+
+.reduce-animations .animate-spin {
+  animation: none;
+}
+
+.reduce-animations .animate-float {
+  animation: none;
+}
+
+.reduce-animations .animate-bounce {
+  animation: none;
 }
 
 /* Text clamp utilities */
@@ -289,11 +318,14 @@ html {
   50% { border-color: currentColor; }
 }
 
-/* Particle animation */
+/* Optimized particle animation */
 .particle {
   position: absolute;
   pointer-events: none;
   opacity: 0.7;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* Morphing shapes */
