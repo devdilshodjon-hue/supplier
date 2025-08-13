@@ -78,7 +78,8 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8" role="navigation" aria-label="Asosiy navigatsiya">
+          <div className="hidden md:flex items-center space-x-6">
+            <nav className="flex space-x-8" role="navigation" aria-label="Asosiy navigatsiya">
             <button
               onClick={() => scrollToSection('hero')}
               className={`relative transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400 ${
@@ -140,10 +141,14 @@ const Header = () => {
             >
               Bog'lanish
             </button>
-          </nav>
+            </nav>
+            <ThemeToggle />
+          </div>
 
-          {/* Mobile Menu Button */}
-          <button
+          {/* Mobile Controls */}
+          <div className="md:hidden flex items-center space-x-3">
+            <ThemeToggle />
+            <button
             className="md:hidden p-2 transform hover:scale-110 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-expanded={isMenuOpen}
@@ -156,6 +161,7 @@ const Header = () => {
               <Menu className={`w-6 h-6 transition-all duration-300 ${textColor}`} />
             )}
           </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
