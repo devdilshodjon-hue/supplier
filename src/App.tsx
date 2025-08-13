@@ -16,6 +16,9 @@ const Footer = lazy(() => import('./components/Footer'));
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
+  // Apply performance optimizations
+  usePerformanceOptimization();
+
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
