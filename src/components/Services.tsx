@@ -143,17 +143,20 @@ const Services: React.FC = () => {
     }`} ref={sectionRef}>
       {/* Background Animation */}
       <div className="absolute inset-0">
-        {[...Array(40)].map((_, i) => (
+        {[...Array(20)].map((_, i) => (
           <div
             key={i}
             className={`absolute w-1 h-1 rounded-full opacity-40 animate-float ${
               isDark ? 'bg-blue-400' : 'bg-blue-200'
             }`}
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${4 + Math.random() * 6}s`,
+              left: `${(i * 5) % 100}%`,
+              top: `${(i * 7) % 100}%`,
+              animationDelay: `${(i * 0.2) % 3}s`,
+              animationDuration: '5s',
+              willChange: 'transform',
+              backfaceVisibility: 'hidden',
+              transform: 'translateZ(0)'
             }}
           />
         ))}
@@ -193,14 +196,16 @@ const Services: React.FC = () => {
                 {/* Animated particles on hover */}
                 {isHovered && (
                   <div className="absolute inset-0 overflow-hidden">
-                    {[...Array(15)].map((_, i) => (
+                    {[...Array(8)].map((_, i) => (
                       <div
                         key={i}
                         className="absolute w-1 h-1 bg-white/30 rounded-full animate-ping"
                         style={{
-                          left: `${Math.random() * 100}%`,
-                          top: `${Math.random() * 100}%`,
-                          animationDelay: `${Math.random() * 2}s`,
+                          left: `${15 + (i * 12) % 70}%`,
+                          top: `${20 + (i * 8) % 60}%`,
+                          animationDelay: `${(i * 0.25) % 1.5}s`,
+                          willChange: 'transform, opacity',
+                          backfaceVisibility: 'hidden'
                         }}
                       />
                     ))}
