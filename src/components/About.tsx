@@ -110,7 +110,9 @@ const About: React.FC = () => {
         {[...Array(30)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 bg-blue-100 rounded-full opacity-30 animate-float"
+            className={`absolute w-2 h-2 rounded-full opacity-30 animate-float ${
+              isDark ? 'bg-blue-400' : 'bg-blue-100'
+            }`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -215,11 +217,11 @@ const About: React.FC = () => {
                       </div>
                     </div>
                     
-                    <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                    <h4 className={`${typography.cardTitle} ${textColors.primary} mb-2 group-hover:text-blue-600 transition-colors duration-300`}>
                       {member.name}
                     </h4>
-                    <p className="text-blue-600 font-semibold mb-2">{member.role}</p>
-                    <p className="text-sm text-gray-600">{member.expertise}</p>
+                    <p className={`text-blue-600 ${typography.cardSubtitle} font-semibold mb-2`}>{member.role}</p>
+                    <p className={`${typography.cardBody} ${textColors.secondary}`}>{member.expertise}</p>
                   </div>
                 </div>
               </div>
