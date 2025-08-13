@@ -109,7 +109,7 @@ const Hero: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up animation-delay-1000 mb-16">
           <button
             onClick={() => scrollToSection('about')}
-            className="group bg-white text-blue-600 px-10 py-5 rounded-full font-bold text-lg hover:bg-blue-50 transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-white/20 relative overflow-hidden"
+            className="group bg-white text-blue-600 px-6 py-3 rounded-full font-semibold text-base hover:bg-blue-50 transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-white/20 relative overflow-hidden"
             aria-label="Biz haqimizda qismiga o'tish"
           >
             <span className="relative z-10">Boshlash</span>
@@ -117,7 +117,7 @@ const Hero: React.FC = () => {
           </button>
           <button
             onClick={() => scrollToSection('portfolio')}
-            className="group border-2 border-white text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-500 transform hover:scale-110 shadow-2xl relative overflow-hidden"
+            className="group border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-base hover:bg-white hover:text-blue-600 transition-all duration-500 transform hover:scale-110 shadow-2xl relative overflow-hidden"
             aria-label="Portfolio qismiga o'tish"
           >
             <span className="relative z-10">Portfolio ko'rish</span>
