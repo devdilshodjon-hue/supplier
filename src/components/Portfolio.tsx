@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ExternalLink, Github, Filter } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+import { typography, getTextColors } from '../utils/typography';
 
 const Portfolio: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [visibleProjects, setVisibleProjects] = useState<boolean[]>([]);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { isDark } = useTheme();
+  const textColors = getTextColors(isDark);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
