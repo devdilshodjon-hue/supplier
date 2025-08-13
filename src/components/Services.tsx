@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Code, Smartphone, Bot, Palette, Server, Shield } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+import { typography, getTextColors } from '../utils/typography';
 
 const Services: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [visibleCards, setVisibleCards] = useState<boolean[]>([]);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { isDark } = useTheme();
+  const textColors = getTextColors(isDark);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -134,7 +138,9 @@ const Services: React.FC = () => {
   };
 
   return (
-    <section id="services" className="py-20 bg-gradient-to-br from-white to-gray-50 relative overflow-hidden" ref={sectionRef}>
+    <section id="services" className={`py-20 relative overflow-hidden transition-colors duration-300 ${
+      isDark ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-white to-gray-50'
+    }`} ref={sectionRef}>
       {/* Background Animation */}
       <div className="absolute inset-0">
         {[...Array(40)].map((_, i) => (
@@ -153,13 +159,13 @@ const Services: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-fade-in-up">
+          <h2 className={`${typography.h1} ${textColors.primary} mb-6 animate-fade-in-up`}>
             Bizning{' '}
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Xizmatlarimiz
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
+          <p className={`${typography.bodyLarge} ${textColors.secondary} max-w-4xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200`}>
             Biznesingizni zamonaviy dunyoda rivojlantirishga yordam beradigan keng qamrovli raqamli yechimlarni taklif etamiz.
           </p>
         </div>
