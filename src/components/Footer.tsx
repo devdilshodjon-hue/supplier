@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className={`transition-colors duration-300 ${
-      isDark ? 'bg-gray-900 text-white' : 'bg-gray-800 text-gray-100'
+      isDark ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
