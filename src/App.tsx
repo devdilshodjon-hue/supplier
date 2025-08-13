@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Portfolio from './components/Portfolio';
-import Contact from './components/Contact';
-import Blog from './components/Blog';
-import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
+import LazySection from './components/LazySection';
+
+// Lazy load non-critical components
+const About = lazy(() => import('./components/About'));
+const Services = lazy(() => import('./components/Services'));
+const Portfolio = lazy(() => import('./components/Portfolio'));
+const Contact = lazy(() => import('./components/Contact'));
+const Blog = lazy(() => import('./components/Blog'));
+const Footer = lazy(() => import('./components/Footer'));
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,12 +32,24 @@ function App() {
     <div className="min-h-screen bg-white">
       <Header />
       <Hero />
-      <About />
-      <Services />
-      <Portfolio />
-      <Contact />
-      <Blog />
-      <Footer />
+      <LazySection>
+        <About />
+      </LazySection>
+      <LazySection>
+        <Services />
+      </LazySection>
+      <LazySection>
+        <Portfolio />
+      </LazySection>
+      <LazySection>
+        <Contact />
+      </LazySection>
+      <LazySection>
+        <Blog />
+      </LazySection>
+      <LazySection>
+        <Footer />
+      </LazySection>
     </div>
   );
 }
