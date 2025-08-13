@@ -146,11 +146,13 @@ const Footer: React.FC = () => {
                 <input
                   type="email"
                   placeholder="Sizning emailingiz"
-                  className={`flex-1 px-4 py-2 rounded-l-lg focus:outline-none focus:border-blue-500 transition-colors duration-300 ${
-                    isDark ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                  className={`flex-1 px-4 py-2 rounded-l-lg focus:outline-none focus:border-blue-300 transition-colors duration-300 ${
+                    isDark ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400' : 'bg-blue-500 border-blue-400 text-white placeholder-blue-200'
                   }`}
                 />
-                <button className="bg-blue-600 px-4 py-2 rounded-r-lg hover:bg-blue-700 transition-colors duration-300">
+                <button className={`px-4 py-2 rounded-r-lg transition-colors duration-300 ${
+                  isDark ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-400 hover:bg-blue-300'
+                }`}>
                   <Mail className="w-4 h-4" />
                 </button>
               </div>
@@ -160,25 +162,25 @@ const Footer: React.FC = () => {
 
         {/* Bottom Footer */}
         <div className={`border-t py-8 ${
-          isDark ? 'border-gray-800' : 'border-gray-300'
+          isDark ? 'border-gray-800' : 'border-blue-500'
         }`}>
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className={`${typography.footerText} ${
-              isDark ? 'text-gray-400' : 'text-gray-600'
+              isDark ? 'text-gray-400' : 'text-blue-100'
             }`}>
               © 2024 Supplier IT. All rights reserved. | supplier.uz
             </div>
             <div className={`flex space-x-6 ${typography.footerText} ${
-              isDark ? 'text-gray-400' : 'text-gray-600'
+              isDark ? 'text-gray-400' : 'text-blue-200'
             }`}>
               <a href="#" className={`transition-colors duration-300 ${
-                isDark ? 'hover:text-white' : 'hover:text-gray-800'
+                isDark ? 'hover:text-white' : 'hover:text-white'
               }`}>Maxfiylik Siyosati</a>
               <a href="#" className={`transition-colors duration-300 ${
-                isDark ? 'hover:text-white' : 'hover:text-gray-800'
+                isDark ? 'hover:text-white' : 'hover:text-white'
               }`}>Xizmat Shartlari</a>
               <a href="#" className={`transition-colors duration-300 ${
-                isDark ? 'hover:text-white' : 'hover:text-gray-800'
+                isDark ? 'hover:text-white' : 'hover:text-white'
               }`}>Sayt Xaritasi</a>
             </div>
           </div>
