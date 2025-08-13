@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { ChevronDown, Code, Smartphone, Bot } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { typography, getTextColors } from '../utils/typography';
+import { generateOptimizedParticles, generateOptimizedShapes } from '../utils/performanceAnimations';
 
 const Hero: React.FC = () => {
   const [currentText, setCurrentText] = useState('');
@@ -9,6 +10,10 @@ const Hero: React.FC = () => {
   const texts = ['Professional Veb-saytlar', 'Mobil Ilovalar', 'Telegram Botlar', 'Raqamli Yechimlar'];
   const { isDark } = useTheme();
   const textColors = getTextColors(isDark);
+
+  // Memoize particles for better performance
+  const optimizedParticles = useMemo(() => generateOptimizedParticles(12), []);
+  const optimizedShapes = useMemo(() => generateOptimizedShapes(6), []);
 
   useEffect(() => {
     const typeWriter = () => {
@@ -46,36 +51,28 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0" aria-hidden="true">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/50 via-blue-700/50 to-blue-800/50"></div>
         <div className="absolute w-full h-full">
-          {[...Array(20)].map((_, i) => (
+          {optimizedParticles.map((particle) => (
             <div
-              key={i}
+              key={particle.id}
               className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${2 + Math.random() * 3}s`,
-                transform: `scale(${0.5 + Math.random() * 1.5})`,
-              }}
+              style={particle}
             />
           ))}
         </div>
         
         {/* Floating geometric shapes */}
         <div className="absolute inset-0">
-          {[...Array(8)].map((_, i) => (
+          {optimizedShapes.map((shape) => (
             <div
-              key={i}
+              key={shape.id}
               className="absolute opacity-10"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animation: `float ${5 + Math.random() * 5}s ease-in-out infinite`,
-                animationDelay: `${Math.random() * 5}s`,
-              }}
+              style={shape}
             >
               <div className="w-4 h-4 bg-white rotate-45 animate-spin" style={{
-                animationDuration: `${10 + Math.random() * 10}s`
+                animationDuration: '8s',
+                willChange: 'transform',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)'
               }}></div>
             </div>
           ))}
