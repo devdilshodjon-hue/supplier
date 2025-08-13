@@ -218,7 +218,7 @@ const Contact: React.FC = () => {
                     required
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 group-hover:border-blue-300"
+                    className={getInputStyles(isDark)}
                     placeholder="Sizning to'liq ismingiz"
                   />
                 </div>
@@ -233,7 +233,7 @@ const Contact: React.FC = () => {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 group-hover:border-blue-300"
+                    className={getInputStyles(isDark)}
                     placeholder="sizning@email.com"
                   />
                 </div>
@@ -250,7 +250,7 @@ const Contact: React.FC = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 group-hover:border-blue-300"
+                    className={getInputStyles(isDark)}
                     placeholder="+998 99 534 03 13"
                   />
                 </div>
@@ -264,7 +264,7 @@ const Contact: React.FC = () => {
                     required
                     value={formData.subject}
                     onChange={handleInputChange}
-                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 group-hover:border-blue-300"
+                    className={getInputStyles(isDark)}
                   >
                     <option value="">Xizmatni tanlang</option>
                     {subjects.map((subject, index) => (
