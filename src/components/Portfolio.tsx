@@ -130,13 +130,17 @@ const Portfolio: React.FC = () => {
   };
 
   return (
-    <section id="portfolio" className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden" ref={sectionRef}>
+    <section id="portfolio" className={`py-20 relative overflow-hidden transition-colors duration-300 ${
+      isDark ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-gray-50 to-white'
+    }`} ref={sectionRef}>
       {/* Background Animation */}
       <div className="absolute inset-0">
         {[...Array(50)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-blue-200 rounded-full opacity-30 animate-pulse"
+            className={`absolute w-1 h-1 rounded-full opacity-30 animate-pulse ${
+              isDark ? 'bg-blue-400' : 'bg-blue-200'
+            }`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
