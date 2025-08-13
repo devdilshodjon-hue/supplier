@@ -111,23 +111,29 @@ const Footer: React.FC = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Aloqa Ma'lumotlari</h3>
+            <h3 className={`${typography.footerTitle} font-semibold mb-6`}>Aloqa Ma'lumotlari</h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-gray-400">Toshkent, O'zbekiston</p>
+                  <p className={`${typography.footerText} ${
+                    isDark ? 'text-gray-400' : 'text-gray-300'
+                  }`}>Toshkent, O'zbekiston</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                <a href="tel:+998995340313" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <a href="tel:+998995340313" className={`${typography.footerText} transition-colors duration-300 ${
+                  isDark ? 'text-gray-400 hover:text-white' : 'text-gray-300 hover:text-gray-100'
+                }`}>
                   +998 99 534 03 13
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                <a href="mailto:dev.dilshodjon@gmail.com" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <a href="mailto:dev.dilshodjon@gmail.com" className={`${typography.footerText} transition-colors duration-300 ${
+                  isDark ? 'text-gray-400 hover:text-white' : 'text-gray-300 hover:text-gray-100'
+                }`}>
                   dev.dilshodjon@gmail.com
                 </a>
               </div>
@@ -135,12 +141,14 @@ const Footer: React.FC = () => {
 
             {/* Newsletter Signup */}
             <div className="mt-8">
-              <h4 className="text-sm font-semibold mb-3">Yangilanib Turing</h4>
+              <h4 className={`${typography.footerText} font-semibold mb-3`}>Yangilanib Turing</h4>
               <div className="flex">
                 <input
                   type="email"
                   placeholder="Sizning emailingiz"
-                  className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:border-blue-500 transition-colors duration-300"
+                  className={`flex-1 px-4 py-2 rounded-l-lg focus:outline-none focus:border-blue-500 transition-colors duration-300 ${
+                    isDark ? 'bg-gray-800 border-gray-700 text-white' : 'bg-gray-700 border-gray-600 text-gray-100'
+                  } placeholder-gray-400`}
                 />
                 <button className="bg-blue-600 px-4 py-2 rounded-r-lg hover:bg-blue-700 transition-colors duration-300">
                   <Mail className="w-4 h-4" />
