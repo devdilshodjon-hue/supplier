@@ -15,8 +15,9 @@ const Contact = lazy(() => import('./components/Contact'));
 const Blog = lazy(() => import('./components/Blog'));
 const Footer = lazy(() => import('./components/Footer'));
 
-function App() {
+const AppContent: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const { isDark } = useTheme();
 
   // Apply performance optimizations
   usePerformanceOptimization();
@@ -35,7 +36,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
       <SEOOptimizer
         title="Supplier IT - Professional Veb Dasturlash, Mobil Ilovalar va Telegram Botlar"
         description="Supplier IT - O'zbekistondagi yetakchi IT kompaniya. Professional veb-sayt dasturlash, iOS va Android uchun mobil ilovalar, maxsus Telegram botlar."
@@ -63,6 +64,14 @@ function App() {
         <Footer />
       </LazySection>
     </div>
+  );
+};
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 
