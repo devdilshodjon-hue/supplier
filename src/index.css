@@ -155,6 +155,32 @@
 /* Smooth scrolling and performance */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+body {
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide all scroll indicators */
+:::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+/* Hide scrollbar in all elements */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
 }
 
 /* Respect user motion preferences */
