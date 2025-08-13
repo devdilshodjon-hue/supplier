@@ -165,33 +165,48 @@ const Header = () => {
             <nav className="flex flex-col space-y-4">
               <button
                 onClick={() => scrollToSection('hero')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2"
+                className={`text-left transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2 ${
+                  activeSection === 'hero' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600'
+                }`}
               >
                 Bosh sahifa
+                {activeSection === 'hero' && <span className="ml-2 text-blue-400">●</span>}
               </button>
               <button
                 onClick={() => scrollToSection('about')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2"
+                className={`text-left transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2 ${
+                  activeSection === 'about' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600'
+                }`}
               >
                 Biz haqimizda
+                {activeSection === 'about' && <span className="ml-2 text-blue-400">●</span>}
               </button>
               <button
                 onClick={() => scrollToSection('services')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2"
+                className={`text-left transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2 ${
+                  activeSection === 'services' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600'
+                }`}
               >
                 Xizmatlar
+                {activeSection === 'services' && <span className="ml-2 text-blue-400">●</span>}
               </button>
               <button
                 onClick={() => scrollToSection('portfolio')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2"
+                className={`text-left transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2 ${
+                  activeSection === 'portfolio' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600'
+                }`}
               >
                 Portfolio
+                {activeSection === 'portfolio' && <span className="ml-2 text-blue-400">●</span>}
               </button>
               <button
                 onClick={() => scrollToSection('blog')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2"
+                className={`text-left transition-all duration-300 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg transform hover:translate-x-2 ${
+                  activeSection === 'blog' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600'
+                }`}
               >
                 Blog
+                {activeSection === 'blog' && <span className="ml-2 text-blue-400">●</span>}
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
