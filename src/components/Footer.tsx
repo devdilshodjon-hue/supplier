@@ -164,21 +164,21 @@ const Footer: React.FC = () => {
         }`}>
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className={`${typography.footerText} ${
-              isDark ? 'text-gray-400' : 'text-gray-300'
+              isDark ? 'text-gray-400' : 'text-gray-600'
             }`}>
               © 2024 Supplier IT. All rights reserved. | supplier.uz
             </div>
             <div className={`flex space-x-6 ${typography.footerText} ${
-              isDark ? 'text-gray-400' : 'text-gray-300'
+              isDark ? 'text-gray-400' : 'text-gray-600'
             }`}>
               <a href="#" className={`transition-colors duration-300 ${
-                isDark ? 'hover:text-white' : 'hover:text-gray-100'
+                isDark ? 'hover:text-white' : 'hover:text-gray-800'
               }`}>Maxfiylik Siyosati</a>
               <a href="#" className={`transition-colors duration-300 ${
-                isDark ? 'hover:text-white' : 'hover:text-gray-100'
+                isDark ? 'hover:text-white' : 'hover:text-gray-800'
               }`}>Xizmat Shartlari</a>
               <a href="#" className={`transition-colors duration-300 ${
-                isDark ? 'hover:text-white' : 'hover:text-gray-100'
+                isDark ? 'hover:text-white' : 'hover:text-gray-800'
               }`}>Sayt Xaritasi</a>
             </div>
           </div>
