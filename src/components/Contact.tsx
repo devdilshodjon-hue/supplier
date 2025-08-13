@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+import { typography, getTextColors } from '../utils/typography';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +15,8 @@ const Contact: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { isDark } = useTheme();
+  const textColors = getTextColors(isDark);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
