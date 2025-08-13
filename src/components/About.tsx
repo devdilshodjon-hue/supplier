@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Users, Award, Clock, Globe } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { typography, getTextColors } from '../utils/typography';
+import OptimizedImage from './OptimizedImage';
 
 const About: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -69,25 +70,33 @@ const About: React.FC = () => {
       name: 'Dilshodjon Abdullayev',
       role: 'Bosh Dasturchi',
       expertise: 'Full-Stack Dasturlash',
-      image: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=400'
+      image: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg',
+      placeholder: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli5GFvLggA7jHQW/4UhtlhfuKCa7gAwC5wxknx7eAR/Nx7u0AjG88/8AXb9AoqVk0KGjsHAHTZO+Cjj5f/g==',
+      alt: 'Dilshodjon Abdullayev - Bosh Dasturchi'
     },
     {
       name: 'Aziza Karimova',
       role: 'Mobil Ilova Mutaxassisi',
       expertise: 'iOS va Android Dasturlash',
-      image: 'https://images.pexels.com/photos/3727464/pexels-photo-3727464.jpeg?auto=compress&cs=tinysrgb&w=400'
+      image: 'https://images.pexels.com/photos/3727464/pexels-photo-3727464.jpeg',
+      placeholder: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli5GFvLggA7jHQW/4UhtlhfuKCa7gAwC5wxknx7eAR/Nx7u0AjG88/8AXb9AoqVk0KGjsHAHTZO+Cjj5f/g==',
+      alt: 'Aziza Karimova - Mobil Ilova Mutaxassisi'
     },
     {
       name: 'Bobur Rahimov',
       role: 'Bot Dasturchisi',
       expertise: 'Telegram Bot Yaratish',
-      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400'
+      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg',
+      placeholder: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli5GFvLggA7jHQW/4UhtlhfuKCa7gAwC5wxknx7eAR/Nx7u0AjG88/8AXb9AoqVk0KGjsHAHTZO+Cjj5f/g==',
+      alt: 'Bobur Rahimov - Bot Dasturchisi'
     },
     {
       name: 'Madina Toshmatova',
       role: 'UI/UX Dizayner',
       expertise: 'Dizayn va Foydalanuvchi Tajribasi',
-      image: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400'
+      image: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg',
+      placeholder: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli5GFvLggA7jHQW/4UhtlhfuKCa7gAwC5wxknx7eAR/Nx7u0AjG88/8AXb9AoqVk0KGjsHAHTZO+Cjj5f/g==',
+      alt: 'Madina Toshmatova - UI/UX Dizayner'
     },
   ];
 
@@ -102,11 +111,16 @@ const About: React.FC = () => {
   };
 
   return (
-    <section id="about" className={`py-20 relative overflow-hidden transition-colors duration-300 ${
-      isDark ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-gray-50 to-white'
-    }`} ref={sectionRef}>
+    <section 
+      id="about" 
+      className={`py-20 relative overflow-hidden transition-colors duration-300 ${
+        isDark ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-gray-50 to-white'
+      }`} 
+      ref={sectionRef}
+      aria-labelledby="about-heading"
+    >
       {/* Background Animation */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" aria-hidden="true">
         {[...Array(30)].map((_, i) => (
           <div
             key={i}
@@ -126,7 +140,10 @@ const About: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-20">
-          <h2 className={`${typography.h1} ${textColors.primary} mb-6 animate-fade-in-up`}>
+          <h2 
+            id="about-heading"
+            className={`${typography.h1} ${textColors.primary} mb-6 animate-fade-in-up`}
+          >
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Supplier IT
             </span>{' '}
@@ -139,23 +156,29 @@ const About: React.FC = () => {
         </div>
 
         {/* Animated Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-24" role="list" aria-label="Kompaniya statistikasi">
           {stats.map((stat, index) => (
             <div 
               key={index}
               className="group text-center cursor-pointer transform hover:scale-110 transition-all duration-500"
               style={{ animationDelay: `${index * 0.2}s` }}
+              role="listitem"
+              tabIndex={0}
+              aria-label={`${stat.number}${stat.suffix} ${stat.label}`}
             >
-              <div className={`relative rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden ${
+              <div className={`relative rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                 isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white'
               }`}>
                 {/* Animated background gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${getColorClasses(stat.color)} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${getColorClasses(stat.color)} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} aria-hidden="true"></div>
                 
                 <div className="relative z-10">
                   <div className="relative mb-6">
-                    <stat.icon className="w-16 h-16 text-blue-600 mx-auto group-hover:scale-125 group-hover:rotate-12 transition-all duration-500" />
-                    <div className="absolute inset-0 bg-blue-600/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-ping"></div>
+                    <stat.icon 
+                      className="w-16 h-16 text-blue-600 mx-auto group-hover:scale-125 group-hover:rotate-12 transition-all duration-500" 
+                      aria-hidden="true"
+                    />
+                    <div className="absolute inset-0 bg-blue-600/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-ping" aria-hidden="true"></div>
                   </div>
                   
                   <h3 className={`${typography.statNumber} ${textColors.primary} mb-3 group-hover:text-blue-600 transition-colors duration-300`}>
@@ -177,32 +200,40 @@ const About: React.FC = () => {
             </span>
           </h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" role="list" aria-label="Jamoa a'zolari">
             {team.map((member, index) => (
               <div 
                 key={index}
                 className="group cursor-pointer transform hover:scale-105 transition-all duration-500"
                 style={{ animationDelay: `${index * 0.1}s` }}
+                role="listitem"
+                tabIndex={0}
+                aria-label={`${member.name} - ${member.role}. ${member.expertise}`}
               >
-                <div className={`rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 text-center relative overflow-hidden ${
+                <div className={`rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 text-center relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                   isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white'
                 }`}>
                   {/* Animated background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
                   
                   <div className="relative z-10">
                     <div className="relative mb-6">
-                      <div className="relative">
-                        <img
+                      <div className="relative w-28 h-28 mx-auto">
+                        <OptimizedImage
                           src={member.image}
-                          alt={member.name}
-                          className="w-28 h-28 rounded-full mx-auto object-cover group-hover:scale-110 transition-transform duration-500 shadow-lg"
+                          alt={member.alt}
+                          width={112}
+                          height={112}
+                          className="w-28 h-28 rounded-full object-cover group-hover:scale-110 transition-transform duration-500 shadow-lg"
+                          loading="lazy"
+                          placeholder={member.placeholder}
+                          sizes="112px"
                         />
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
                       </div>
                       
                       {/* Floating particles around image */}
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true">
                         {[...Array(4)].map((_, i) => (
                           <div
                             key={i}
