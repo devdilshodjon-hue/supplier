@@ -69,33 +69,43 @@ const Hero: React.FC = () => {
       aria-label="Bosh sahifa qismi"
     >
       {/* Animated Background Particles - Hidden from screen readers */}
-      <div className="absolute inset-0" aria-hidden="true">
+      <div className="absolute inset-0" aria-hidden="true" style={{ contain: 'layout style paint' }}>
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/50 via-blue-700/50 to-blue-800/50"></div>
         {!prefersReducedMotion && (
           <>
-            <div className="absolute w-full h-full">
-              {optimizedParticles.map((particle) => (
+            <div className="absolute w-full h-full" style={{ contain: 'layout style' }}>
+              {optimizedParticles.slice(0, 8).map((particle) => (
                 <div
                   key={particle.id}
-                  className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
-                  style={particle}
+                  className="absolute w-1 h-1 bg-white/20 rounded-full"
+                  style={{
+                    ...particle,
+                    willChange: 'opacity',
+                    backfaceVisibility: 'hidden',
+                    transform: 'translateZ(0)',
+                    animation: 'pulse 2s ease-in-out infinite'
+                  }}
                 />
               ))}
             </div>
-            
-            {/* Floating geometric shapes */}
-            <div className="absolute inset-0">
-              {optimizedShapes.map((shape) => (
+
+            {/* Floating geometric shapes - Reduced count */}
+            <div className="absolute inset-0" style={{ contain: 'layout style' }}>
+              {optimizedShapes.slice(0, 4).map((shape) => (
                 <div
                   key={shape.id}
                   className="absolute opacity-10"
-                  style={shape}
+                  style={{
+                    ...shape,
+                    contain: 'layout style'
+                  }}
                 >
-                  <div className="w-4 h-4 bg-white rotate-45 animate-spin" style={{
+                  <div className="w-4 h-4 bg-white rotate-45" style={{
                     animationDuration: '8s',
                     willChange: 'transform',
                     backfaceVisibility: 'hidden',
-                    transform: 'translateZ(0)'
+                    transform: 'translateZ(0) rotate(45deg)',
+                    animation: 'spin 8s linear infinite'
                   }}></div>
                 </div>
               ))}
@@ -125,11 +135,16 @@ const Hero: React.FC = () => {
           </span>
         </h1>
         
-        <div className="h-16 sm:h-24 flex items-center justify-center mb-10">
+        <div className="h-16 sm:h-24 flex items-center justify-center mb-10" style={{ contain: 'layout' }}>
           <div
             aria-live="polite"
             aria-label={`Hozir ko'rsatilayotgan xizmat: ${currentText || texts[currentIndex]}`}
-            className={`${typography.heroAnimated} text-blue-200 animate-fade-in-up animation-delay-600`}
+            className={`${typography.heroAnimated} text-blue-200 animate-fade-in-up animation-delay-600 min-h-[2rem] flex items-center justify-center`}
+            style={{
+              width: '100%',
+              maxWidth: '500px',
+              contain: 'layout style'
+            }}
           >
             {/* Control animation playback */}
             <button
@@ -139,10 +154,10 @@ const Hero: React.FC = () => {
             >
               {isAnimationPaused ? "Davom ettirish" : "To'xtatish"}
             </button>
-            
-            <span role="text">
+
+            <span role="text" className="text-center">
               {currentText || texts[currentIndex]}
-              {!prefersReducedMotion && <span className="animate-pulse text-white" aria-hidden="true">|</span>}
+              {!prefersReducedMotion && <span className="animate-pulse text-white ml-1" aria-hidden="true">|</span>}
             </span>
           </div>
         </div>
@@ -170,10 +185,11 @@ const Hero: React.FC = () => {
           </button>
         </div>
 
-        <div 
-          className="grid grid-cols-1 sm:grid-cols-3 gap-8 animate-fade-in-up animation-delay-1200" 
-          role="list" 
+        <div
+          className="grid grid-cols-1 sm:grid-cols-3 gap-8 animate-fade-in-up animation-delay-1200"
+          role="list"
           aria-label="Asosiy xizmatlar ro'yxati"
+          style={{ contain: 'layout style' }}
         >
           {[
             { icon: Code, label: 'Veb Dasturlash', delay: '0s', description: 'Professional veb-saytlar va veb-ilovalar yaratish' },
