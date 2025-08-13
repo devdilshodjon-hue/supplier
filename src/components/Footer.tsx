@@ -1,7 +1,12 @@
 import React from 'react';
 import { Bot, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Github } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+import { typography, getTextColors } from '../utils/typography';
 
 const Footer: React.FC = () => {
+  const { isDark } = useTheme();
+  const textColors = getTextColors(isDark);
+
   const socialLinks = [
     { icon: Facebook, href: '#', label: 'Facebook' },
     { icon: Twitter, href: '#', label: 'Twitter' },
@@ -35,7 +40,9 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className={`transition-colors duration-300 ${
+      isDark ? 'bg-gray-900 text-white' : 'bg-gray-800 text-gray-100'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -45,7 +52,9 @@ const Footer: React.FC = () => {
               <Bot className="w-8 h-8 text-blue-400" />
               <span className="text-xl font-bold">Supplier IT</span>
             </div>
-            <p className="text-gray-400 mb-6 leading-relaxed">
+            <p className={`${typography.body} mb-6 leading-relaxed ${
+              isDark ? 'text-gray-400' : 'text-gray-300'
+            }`}>
               G'oyalarni zamonaviy texnologiyalar va innovatsion yechimlar bilan raqamli haqiqatga aylantiramiz. 
               Veb dasturlash, mobil ilovalar va avtomatlashtirish sohasidagi ishonchli hamkoringiz.
             </p>
