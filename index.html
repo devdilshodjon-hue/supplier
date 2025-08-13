@@ -5,6 +5,29 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Critical CSS inline to prevent render blocking -->
+    <style>
+      /* Critical above-the-fold styles */
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+      #root { min-height: 100vh; }
+      .loading-screen { 
+        position: fixed; 
+        inset: 0; 
+        background: #fff; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        z-index: 50; 
+      }
+    </style>
+    
+    <!-- Resource hints for performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <!-- SEO Meta Tags -->
     <title>Supplier IT - Professional Veb Dasturlash, Mobil Ilovalar va Telegram Botlar | supplier.uz</title>
     <meta name="description" content="Supplier IT - O'zbekistondagi yetakchi IT kompaniya. Professional veb-sayt dasturlash, iOS va Android uchun mobil ilovalar, maxsus Telegram botlar. Mutaxassis jamoa, zamonaviy yechimlar, raqobatbardosh narxlar." />
@@ -42,10 +65,7 @@
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-
-    <!-- Preconnect to external domains for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="color-scheme" content="light dark">
 
     <!-- Favicon improvements -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
