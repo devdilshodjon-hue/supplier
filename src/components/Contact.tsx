@@ -101,13 +101,17 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-white to-gray-50 relative overflow-hidden" ref={sectionRef}>
+    <section id="contact" className={`py-20 relative overflow-hidden transition-colors duration-300 ${
+      isDark ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-white to-gray-50'
+    }`} ref={sectionRef}>
       {/* Background Animation */}
       <div className="absolute inset-0">
         {[...Array(60)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-blue-200 rounded-full opacity-30 animate-pulse"
+            className={`absolute w-1 h-1 rounded-full opacity-30 animate-pulse ${
+              isDark ? 'bg-blue-400' : 'bg-blue-200'
+            }`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
