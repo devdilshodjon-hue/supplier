@@ -203,14 +203,16 @@ const About: React.FC = () => {
                       
                       {/* Floating particles around image */}
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        {[...Array(8)].map((_, i) => (
+                        {[...Array(4)].map((_, i) => (
                           <div
                             key={i}
                             className="absolute w-2 h-2 bg-blue-400 rounded-full animate-ping"
                             style={{
-                              left: `${20 + Math.random() * 60}%`,
-                              top: `${20 + Math.random() * 60}%`,
-                              animationDelay: `${i * 0.2}s`,
+                              left: `${25 + (i * 20)}%`,
+                              top: `${30 + (i % 2) * 40}%`,
+                              animationDelay: `${i * 0.3}s`,
+                              willChange: 'transform, opacity',
+                              backfaceVisibility: 'hidden'
                             }}
                           />
                         ))}
