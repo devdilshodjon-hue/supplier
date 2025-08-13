@@ -147,8 +147,8 @@ const Footer: React.FC = () => {
                   type="email"
                   placeholder="Sizning emailingiz"
                   className={`flex-1 px-4 py-2 rounded-l-lg focus:outline-none focus:border-blue-500 transition-colors duration-300 ${
-                    isDark ? 'bg-gray-800 border-gray-700 text-white' : 'bg-gray-700 border-gray-600 text-gray-100'
-                  } placeholder-gray-400`}
+                    isDark ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                  }`}
                 />
                 <button className="bg-blue-600 px-4 py-2 rounded-r-lg hover:bg-blue-700 transition-colors duration-300">
                   <Mail className="w-4 h-4" />
@@ -160,7 +160,7 @@ const Footer: React.FC = () => {
 
         {/* Bottom Footer */}
         <div className={`border-t py-8 ${
-          isDark ? 'border-gray-800' : 'border-gray-700'
+          isDark ? 'border-gray-800' : 'border-gray-300'
         }`}>
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className={`${typography.footerText} ${
