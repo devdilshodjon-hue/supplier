@@ -8,13 +8,15 @@ const ThemeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}
-      className={`group relative flex items-center justify-center w-14 h-8 rounded-full transition-all duration-500 transform hover:scale-105 ${
+      className={`group relative flex items-center justify-center w-14 h-8 rounded-full transition-all duration-500 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
         isDark
-          ? 'bg-gradient-to-r from-purple-900 to-blue-900 shadow-lg shadow-purple-500/25'
-          : 'bg-gradient-to-r from-blue-400 to-cyan-400 shadow-lg shadow-blue-500/25'
+          ? 'bg-gradient-to-r from-purple-900 to-blue-900 shadow-lg shadow-purple-500/25 focus:ring-purple-500'
+          : 'bg-gradient-to-r from-blue-400 to-cyan-400 shadow-lg shadow-blue-500/25 focus:ring-blue-500'
       }`}
-      aria-label={isDark ? 'Light mode ga o\'tish' : 'Dark mode ga o\'tish'}
-      title={isDark ? 'Light mode' : 'Dark mode'}
+      aria-label={isDark ? 'Yorug\'lik rejimiga o\'tish' : 'Qorong\'u rejimiga o\'tish'}
+      aria-pressed={isDark}
+      role="switch"
+      title={isDark ? 'Yorug\'lik rejimi' : 'Qorong\'u rejimi'}
     >
       {/* Toggle background */}
       <div className={`absolute inset-0 rounded-full transition-all duration-500 ${
@@ -29,11 +31,13 @@ const ThemeToggle: React.FC = () => {
           className={`absolute w-3 h-3 text-yellow-500 transition-all duration-500 transform ${
             isDark ? 'rotate-180 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'
           }`}
+          aria-hidden="true"
         />
         <Moon
           className={`absolute w-3 h-3 text-purple-600 transition-all duration-500 transform ${
             isDark ? 'rotate-0 scale-100 opacity-100' : 'rotate-180 scale-0 opacity-0'
           }`}
+          aria-hidden="true"
         />
       </div>
 
