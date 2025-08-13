@@ -6,6 +6,7 @@ import LazySection from './components/LazySection';
 import SEOOptimizer from './components/SEOOptimizer';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import { usePerformanceOptimization } from './hooks/usePerformance';
+import { useAnimationOptimization } from './hooks/useAnimationOptimization';
 
 // Lazy load non-critical components
 const About = lazy(() => import('./components/About'));
