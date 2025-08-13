@@ -80,10 +80,13 @@
   }
 }
 
-/* Utility classes */
+/* Performance-optimized utility classes */
 .animate-fade-in-up {
   animation: fade-in-up 0.8s ease-out forwards;
   opacity: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .animation-delay-200 {
@@ -112,10 +115,16 @@
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .animate-bounce-slow {
   animation: bounce-slow 3s ease-in-out infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .animate-rotate-slow {
@@ -124,6 +133,9 @@
 
 .animate-scale-pulse {
   animation: scale-pulse 2s ease-in-out infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .animate-shimmer {
