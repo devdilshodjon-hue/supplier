@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-2 mb-6">
               <Bot className="w-8 h-8 text-blue-400" />
-              <span className="text-xl font-bold">Supplier IT</span>
+              <span className={`${typography.navLarge} font-bold`}>Supplier IT</span>
             </div>
             <p className={`${typography.body} mb-6 leading-relaxed ${
               isDark ? 'text-gray-400' : 'text-gray-300'
@@ -63,7 +63,9 @@ const Footer: React.FC = () => {
                 <a
                   key={index}
                   href={social.href}
-                  className="bg-gray-800 p-3 rounded-full hover:bg-blue-600 transition-all duration-300 transform hover:scale-110"
+                  className={`p-3 rounded-full hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 ${
+                    isDark ? 'bg-gray-800' : 'bg-gray-700'
+                  }`}
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
@@ -74,13 +76,15 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Tezkor Havolalar</h3>
+            <h3 className={`${typography.footerTitle} font-semibold mb-6`}>Tezkor Havolalar</h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <button
                     onClick={() => scrollToSection(link.href)}
-                    className="text-gray-400 hover:text-white transition-colors duration-300 hover:translate-x-1 transform inline-block"
+                    className={`${typography.footerText} transition-colors duration-300 hover:translate-x-1 transform inline-block ${
+                      isDark ? 'text-gray-400 hover:text-white' : 'text-gray-300 hover:text-gray-100'
+                    }`}
                   >
                     {link.label}
                   </button>
@@ -91,11 +95,13 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Bizning Xizmatlarimiz</h3>
+            <h3 className={`${typography.footerTitle} font-semibold mb-6`}>Bizning Xizmatlarimiz</h3>
             <ul className="space-y-3">
               {services.map((service, index) => (
                 <li key={index}>
-                  <span className="text-gray-400 hover:text-white transition-colors duration-300 cursor-pointer hover:translate-x-1 transform inline-block">
+                  <span className={`${typography.footerText} transition-colors duration-300 cursor-pointer hover:translate-x-1 transform inline-block ${
+                    isDark ? 'text-gray-400 hover:text-white' : 'text-gray-300 hover:text-gray-100'
+                  }`}>
                     {service}
                   </span>
                 </li>
