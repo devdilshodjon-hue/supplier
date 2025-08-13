@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Users, Award, Clock, Globe } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+import { typography, getTextColors } from '../utils/typography';
 
 const About: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [counts, setCounts] = useState({ clients: 0, projects: 0, experience: 0, countries: 0 });
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { isDark } = useTheme();
+  const textColors = getTextColors(isDark);
 
   const finalCounts = { clients: 50, projects: 100, experience: 5, countries: 15 };
 
@@ -98,7 +102,9 @@ const About: React.FC = () => {
   };
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden" ref={sectionRef}>
+    <section id="about" className={`py-20 relative overflow-hidden transition-colors duration-300 ${
+      isDark ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-gray-50 to-white'
+    }`} ref={sectionRef}>
       {/* Background Animation */}
       <div className="absolute inset-0">
         {[...Array(30)].map((_, i) => (
@@ -118,13 +124,13 @@ const About: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-20">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-fade-in-up">
+          <h2 className={`${typography.h1} ${textColors.primary} mb-6 animate-fade-in-up`}>
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Supplier IT
             </span>{' '}
             Haqida
           </h2>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
+          <p className={`${typography.bodyLarge} ${textColors.secondary} max-w-4xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200`}>
             Biz ajoyib raqamli tajribalar yaratishga bag'ishlangan ishtiyoqli dasturchilar va dizaynerlar jamoasimiz. 
             O'zbekistonda joylashgan bo'lib, butun dunyo bo'ylab mijozlarga innovatsion texnologik yechimlar taqdim etamiz.
           </p>
