@@ -82,58 +82,33 @@ const Header = () => {
             <nav className="flex space-x-8" role="navigation" aria-label="Asosiy navigatsiya">
             <button
               onClick={() => scrollToSection('hero')}
-              className={`relative transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400 ${
-                activeSection === 'hero' ? 'text-blue-400' : ''
-              }`}
+              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
             >
               Bosh sahifa
-              {activeSection === 'hero' && (
-                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-400 rounded-full animate-pulse"></div>
-              )}
             </button>
             <button
               onClick={() => scrollToSection('about')}
-              className={`relative transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400 ${
-                activeSection === 'about' ? 'text-blue-400' : ''
-              }`}
+              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
             >
               Biz haqimizda
-              {activeSection === 'about' && (
-                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-400 rounded-full animate-pulse"></div>
-              )}
             </button>
             <button
               onClick={() => scrollToSection('services')}
-              className={`relative transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400 ${
-                activeSection === 'services' ? 'text-blue-400' : ''
-              }`}
+              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
             >
               Xizmatlar
-              {activeSection === 'services' && (
-                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-400 rounded-full animate-pulse"></div>
-              )}
             </button>
             <button
               onClick={() => scrollToSection('portfolio')}
-              className={`relative transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400 ${
-                activeSection === 'portfolio' ? 'text-blue-400' : ''
-              }`}
+              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
             >
               Portfolio
-              {activeSection === 'portfolio' && (
-                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-400 rounded-full animate-pulse"></div>
-              )}
             </button>
             <button
               onClick={() => scrollToSection('blog')}
-              className={`relative transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400 ${
-                activeSection === 'blog' ? 'text-blue-400' : ''
-              }`}
+              className={`transition-all duration-300 font-medium hover:scale-105 ${textColor} hover:text-blue-400`}
             >
               Blog
-              {activeSection === 'blog' && (
-                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-400 rounded-full animate-pulse"></div>
-              )}
             </button>
             <button
               onClick={() => scrollToSection('contact')}
