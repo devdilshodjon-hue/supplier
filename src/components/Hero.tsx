@@ -32,9 +32,14 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800"
+      role="banner"
+      aria-label="Bosh sahifa qismi"
+    >
       {/* Animated Background Particles */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" aria-hidden="true">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/50 via-blue-700/50 to-blue-800/50"></div>
         <div className="absolute w-full h-full">
           {[...Array(20)].map((_, i) => (
@@ -79,7 +84,7 @@ const Hero: React.FC = () => {
                style={{ animationDuration: '2s' }} />
         </div>
         
-        <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white mb-8 animate-fade-in-up animation-delay-200">
+        <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white mb-8 animate-fade-in-up animation-delay-200" tabIndex={0}>
           <span className="inline-block animate-pulse">Biz</span>{' '}
           <span className="inline-block bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent animate-pulse animation-delay-400">
             Yaratamiz
@@ -87,7 +92,11 @@ const Hero: React.FC = () => {
         </h1>
         
         <div className="h-20 sm:h-28 flex items-center justify-center mb-10">
-          <span className="text-2xl sm:text-4xl lg:text-6xl font-bold text-blue-200 animate-fade-in-up animation-delay-600">
+          <span
+            className="text-2xl sm:text-4xl lg:text-6xl font-bold text-blue-200 animate-fade-in-up animation-delay-600"
+            aria-live="polite"
+            aria-label={`Hozir ko'rsatilayotgan xizmat: ${currentText}`}
+          >
             {currentText}
             <span className="animate-pulse text-white">|</span>
           </span>
@@ -98,32 +107,43 @@ const Hero: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up animation-delay-1000 mb-16">
-          <button 
+          <button
             onClick={() => scrollToSection('about')}
             className="group bg-white text-blue-600 px-10 py-5 rounded-full font-bold text-lg hover:bg-blue-50 transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-white/20 relative overflow-hidden"
+            aria-label="Biz haqimizda qismiga o'tish"
           >
             <span className="relative z-10">Boshlash</span>
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
           </button>
-          <button 
+          <button
             onClick={() => scrollToSection('portfolio')}
             className="group border-2 border-white text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-500 transform hover:scale-110 shadow-2xl relative overflow-hidden"
+            aria-label="Portfolio qismiga o'tish"
           >
             <span className="relative z-10">Portfolio ko'rish</span>
             <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 animate-fade-in-up animation-delay-1200">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 animate-fade-in-up animation-delay-1200" role="list" aria-label="Xizmatlar ro'yxati">
           {[
             { icon: Code, label: 'Veb Dasturlash', delay: '0s' },
             { icon: Smartphone, label: 'Mobil Ilovalar', delay: '0.2s' },
             { icon: Bot, label: 'Telegram Botlar', delay: '0.4s' }
           ].map((item, index) => (
-            <div 
+            <div
               key={index}
               className="group flex flex-col items-center text-white/90 cursor-pointer transform hover:scale-110 transition-all duration-500"
               style={{ animationDelay: item.delay }}
+              role="listitem"
+              tabIndex={0}
+              aria-label={`${item.label} xizmati`}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  scrollToSection('services');
+                }
+              }}
             >
               <div className="relative mb-4">
                 <item.icon className="w-10 h-10 group-hover:scale-125 transition-transform duration-500" />
@@ -135,10 +155,11 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      <button 
+      <button
         onClick={() => scrollToSection('about')}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce cursor-pointer hover:scale-125 transition-transform duration-300"
         style={{ animationDuration: '2s' }}
+        aria-label="Keyingi qismga o'tish"
       >
         <ChevronDown className="w-10 h-10" />
       </button>
