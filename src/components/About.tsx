@@ -144,7 +144,9 @@ const About: React.FC = () => {
               className="group text-center cursor-pointer transform hover:scale-110 transition-all duration-500"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
-              <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
+              <div className={`relative rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden ${
+                isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+              }`}>
                 {/* Animated background gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${getColorClasses(stat.color)} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
                 
@@ -154,10 +156,10 @@ const About: React.FC = () => {
                     <div className="absolute inset-0 bg-blue-600/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-ping"></div>
                   </div>
                   
-                  <h3 className="text-5xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                  <h3 className={`${typography.statNumber} ${textColors.primary} mb-3 group-hover:text-blue-600 transition-colors duration-300`}>
                     {stat.number}{stat.suffix}
                   </h3>
-                  <p className="text-gray-600 font-medium text-lg">{stat.label}</p>
+                  <p className={`${typography.statLabel} ${textColors.secondary} font-medium`}>{stat.label}</p>
                 </div>
               </div>
             </div>
@@ -166,7 +168,7 @@ const About: React.FC = () => {
 
         {/* Team Section */}
         <div>
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-16 animate-fade-in-up">
+          <h3 className={`${typography.h2} text-center ${textColors.primary} mb-16 animate-fade-in-up`}>
             Bizning{' '}
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Mutaxassis Jamoamiz
@@ -180,7 +182,9 @@ const About: React.FC = () => {
                 className="group cursor-pointer transform hover:scale-105 transition-all duration-500"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 text-center relative overflow-hidden">
+                <div className={`rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 text-center relative overflow-hidden ${
+                  isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+                }`}>
                   {/* Animated background */}
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
