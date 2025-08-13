@@ -168,7 +168,9 @@ const Header = () => {
         {isMenuOpen && (
           <div
             id="mobile-menu"
-            className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 py-4 animate-fade-in-up rounded-b-2xl shadow-xl"
+            className={`md:hidden backdrop-blur-md border-t py-4 animate-fade-in-up rounded-b-2xl shadow-xl ${
+              isDark ? 'bg-gray-900/95 border-gray-700' : 'bg-white/95 border-gray-200'
+            }`}
             role="navigation"
             aria-label="Mobil navigatsiya"
           >
