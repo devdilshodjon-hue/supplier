@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import LoadingScreen from './components/LoadingScreen';
 import LazySection from './components/LazySection';
 import SEOOptimizer from './components/SEOOptimizer';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import { usePerformanceOptimization } from './hooks/usePerformance';
 
 // Lazy load non-critical components
