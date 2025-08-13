@@ -195,7 +195,7 @@ body {
   }
 }
 
-/* Performance optimizations for poor performance */
+/* Performance optimizations and CLS prevention */
 .reduce-animations .animate-pulse {
   animation: none;
 }
@@ -210,6 +210,57 @@ body {
 
 .reduce-animations .animate-bounce {
   animation: none;
+}
+
+/* CSS Containment for better performance */
+.contain-layout {
+  contain: layout;
+}
+
+.contain-layout-style {
+  contain: layout style;
+}
+
+.contain-paint {
+  contain: paint;
+}
+
+.contain-strict {
+  contain: strict;
+}
+
+/* Aspect ratio utilities for preventing CLS */
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+/* Layout stability improvements */
+.stable-layout {
+  contain: layout style paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Critical loading states */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Optimized transforms */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 /* Text clamp utilities */
