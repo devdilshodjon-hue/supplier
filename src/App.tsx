@@ -22,6 +22,7 @@ const AppContent: React.FC = () => {
 
   // Apply performance optimizations
   usePerformanceOptimization();
+  useAnimationOptimization();
 
   useEffect(() => {
     // Simulate loading time
