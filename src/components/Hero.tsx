@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Code, Smartphone, Bot } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+import { typography, getTextColors } from '../utils/typography';
 
 const Hero: React.FC = () => {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const texts = ['Professional Veb-saytlar', 'Mobil Ilovalar', 'Telegram Botlar', 'Raqamli Yechimlar'];
+  const { isDark } = useTheme();
+  const textColors = getTextColors(isDark);
 
   useEffect(() => {
     const typeWriter = () => {
@@ -84,7 +88,7 @@ const Hero: React.FC = () => {
                style={{ animationDuration: '2s' }} />
         </div>
         
-        <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-white mb-8 animate-fade-in-up animation-delay-200" tabIndex={0}>
+        <h1 className={`${typography.heroMain} text-white mb-8 animate-fade-in-up animation-delay-200`} tabIndex={0}>
           <span className="inline-block animate-pulse">Biz</span>{' '}
           <span className="inline-block bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent animate-pulse animation-delay-400">
             Yaratamiz
@@ -95,21 +99,21 @@ const Hero: React.FC = () => {
           <span
             aria-live="polite"
             aria-label={`Hozir ko'rsatilayotgan xizmat: ${currentText}`}
-            className="text-lg sm:text-2xl lg:text-4xl font-bold text-blue-200 animate-fade-in-up animation-delay-600"
+            className={`${typography.heroAnimated} text-blue-200 animate-fade-in-up animation-delay-600`}
           >
             {currentText}
             <span className="animate-pulse text-white">|</span>
           </span>
         </div>
 
-        <p className="text-base sm:text-lg lg:text-xl text-blue-100 mb-12 max-w-3xl mx-auto animate-fade-in-up animation-delay-800 leading-relaxed">
+        <p className={`${typography.heroSubtitle} text-blue-100 mb-12 max-w-3xl mx-auto animate-fade-in-up animation-delay-800 leading-relaxed`}>
           G'oyalarni zamonaviy texnologiyalar va innovatsion yechimlar bilan raqamli haqiqatga aylantiramiz.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up animation-delay-1000 mb-16">
           <button
             onClick={() => scrollToSection('about')}
-            className="group bg-white text-blue-600 px-6 py-3 rounded-full font-semibold text-base hover:bg-blue-50 transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-white/20 relative overflow-hidden"
+            className={`group bg-white text-blue-600 px-6 py-3 rounded-full ${typography.button} hover:bg-blue-50 transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-white/20 relative overflow-hidden`}
             aria-label="Biz haqimizda qismiga o'tish"
           >
             <span className="relative z-10">Boshlash</span>
@@ -117,7 +121,7 @@ const Hero: React.FC = () => {
           </button>
           <button
             onClick={() => scrollToSection('portfolio')}
-            className="group border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-base hover:bg-white hover:text-blue-600 transition-all duration-500 transform hover:scale-110 shadow-2xl relative overflow-hidden"
+            className={`group border-2 border-white text-white px-6 py-3 rounded-full ${typography.button} hover:bg-white hover:text-blue-600 transition-all duration-500 transform hover:scale-110 shadow-2xl relative overflow-hidden`}
             aria-label="Portfolio qismiga o'tish"
           >
             <span className="relative z-10">Portfolio ko'rish</span>
@@ -149,7 +153,7 @@ const Hero: React.FC = () => {
                 <item.icon className="w-10 h-10 group-hover:scale-125 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-ping"></div>
               </div>
-              <span className="text-sm font-medium group-hover:text-white transition-colors duration-300">{item.label}</span>
+              <span className={`${typography.bodySmall} font-medium group-hover:text-white transition-colors duration-300`}>{item.label}</span>
             </div>
           ))}
         </div>
