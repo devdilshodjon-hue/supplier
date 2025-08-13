@@ -146,7 +146,9 @@ const Services: React.FC = () => {
         {[...Array(40)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-blue-200 rounded-full opacity-40 animate-float"
+            className={`absolute w-1 h-1 rounded-full opacity-40 animate-float ${
+              isDark ? 'bg-blue-400' : 'bg-blue-200'
+            }`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -215,12 +217,12 @@ const Services: React.FC = () => {
                     )}
                   </div>
                   
-                  <h3 className={`text-2xl font-bold mb-4 transition-all duration-500 ${colorClasses.text}`}>
+                  <h3 className={`${typography.cardTitle} font-bold mb-4 transition-all duration-500 ${colorClasses.text}`}>
                     {service.title}
                   </h3>
                   
-                  <p className={`mb-6 transition-all duration-500 leading-relaxed ${
-                    isHovered ? 'text-white/90' : 'text-gray-600'
+                  <p className={`${typography.cardSubtitle} mb-6 transition-all duration-500 leading-relaxed ${
+                    isHovered ? 'text-white/90' : (isDark ? 'text-gray-300' : 'text-gray-600')
                   }`}>
                     {service.description}
                   </p>
@@ -229,8 +231,8 @@ const Services: React.FC = () => {
                     {service.features.map((feature, featureIndex) => (
                       <li 
                         key={featureIndex}
-                        className={`flex items-center text-sm transition-all duration-500 ${
-                          isHovered ? 'text-white/80' : 'text-gray-500'
+                        className={`flex items-center ${typography.cardBody} transition-all duration-500 ${
+                          isHovered ? 'text-white/80' : (isDark ? 'text-gray-400' : 'text-gray-500')
                         }`}
                         style={{ animationDelay: `${featureIndex * 0.1}s` }}
                       >
