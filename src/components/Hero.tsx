@@ -84,25 +84,25 @@ const Hero: React.FC = () => {
                style={{ animationDuration: '2s' }} />
         </div>
         
-        <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white mb-8 animate-fade-in-up animation-delay-200" tabIndex={0}>
+        <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold text-white mb-8 animate-fade-in-up animation-delay-200" tabIndex={0}>
           <span className="inline-block animate-pulse">Biz</span>{' '}
           <span className="inline-block bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent animate-pulse animation-delay-400">
             Yaratamiz
           </span>
         </h1>
         
-        <div className="h-20 sm:h-28 flex items-center justify-center mb-10">
+        <div className="h-16 sm:h-24 flex items-center justify-center mb-10">
           <span
-            className="text-2xl sm:text-4xl lg:text-6xl font-bold text-blue-200 animate-fade-in-up animation-delay-600"
             aria-live="polite"
             aria-label={`Hozir ko'rsatilayotgan xizmat: ${currentText}`}
+            className="text-xl sm:text-3xl lg:text-5xl font-bold text-blue-200 animate-fade-in-up animation-delay-600"
           >
             {currentText}
             <span className="animate-pulse text-white">|</span>
           </span>
         </div>
 
-        <p className="text-lg sm:text-xl lg:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto animate-fade-in-up animation-delay-800 leading-relaxed">
+        <p className="text-base sm:text-lg lg:text-xl text-blue-100 mb-12 max-w-3xl mx-auto animate-fade-in-up animation-delay-800 leading-relaxed">
           G'oyalarni zamonaviy texnologiyalar va innovatsion yechimlar bilan raqamli haqiqatga aylantiramiz.
         </p>
 
