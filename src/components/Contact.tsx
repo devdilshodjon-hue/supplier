@@ -124,12 +124,12 @@ const Contact: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-fade-in-up">
+          <h2 className={`${typography.h1} ${textColors.primary} mb-6 animate-fade-in-up`}>
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Bog'laning
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
+          <p className={`${typography.bodyLarge} ${textColors.secondary} max-w-4xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200`}>
             Loyihangizni boshlashga tayyormisiz? G\'oyalaringizni hayotga tatbiq etishda qanday yordam bera olishimizni muhokama qilaylik.
           </p>
         </div>
@@ -137,24 +137,26 @@ const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Information */}
           <div className={`transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
-            <h3 className="text-3xl font-bold text-gray-900 mb-12">Suhbatni Boshlaylik</h3>
+            <h3 className={`${typography.h2} ${textColors.primary} mb-12`}>Suhbatni Boshlaylik</h3>
             
             <div className="space-y-8 mb-12">
               {contactInfo.map((info, index) => (
                 <div 
                   key={index}
-                  className="group flex items-start space-x-6 p-6 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-500 cursor-pointer transform hover:scale-105"
+                  className={`group flex items-start space-x-6 p-6 rounded-2xl hover:shadow-xl transition-all duration-500 cursor-pointer transform hover:scale-105 ${
+                    isDark ? 'hover:bg-gray-800' : 'hover:bg-white'
+                  }`}
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
                   <div className={`flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br ${getColorClasses(info.color)} group-hover:scale-110 transition-transform duration-500`}>
                     <info.icon className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                    <h4 className={`${typography.cardTitle} ${textColors.primary} mb-2 group-hover:text-blue-600 transition-colors duration-300`}>
                       {info.title}
                     </h4>
-                    <p className="text-blue-600 font-semibold mb-2 text-lg">{info.details}</p>
-                    <p className="text-gray-600">{info.description}</p>
+                    <p className={`text-blue-600 font-semibold mb-2 ${typography.cardSubtitle}`}>{info.details}</p>
+                    <p className={`${typography.cardBody} ${textColors.secondary}`}>{info.description}</p>
                   </div>
                 </div>
               ))}
