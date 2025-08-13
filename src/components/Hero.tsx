@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 pt-20 sm:pt-0"
       role="banner"
       aria-label="Bosh sahifa qismi"
     >
@@ -78,9 +78,9 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <div className="mb-6 md:mb-8 animate-fade-in-up">
-          <Bot className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 text-white animate-bounce" 
+      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mt-8 sm:mt-0">
+        <div className="mb-4 md:mb-8 animate-fade-in-up">
+          <Bot className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-6 text-white animate-bounce"
                style={{ animationDuration: '2s' }} />
         </div>
         
