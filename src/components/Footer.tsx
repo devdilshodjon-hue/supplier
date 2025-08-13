@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
               <span className={`${typography.navLarge} font-bold`}>Supplier IT</span>
             </div>
             <p className={`${typography.body} mb-6 leading-relaxed ${
-              isDark ? 'text-gray-400' : 'text-gray-300'
+              isDark ? 'text-gray-400' : 'text-gray-600'
             }`}>
               G'oyalarni zamonaviy texnologiyalar va innovatsion yechimlar bilan raqamli haqiqatga aylantiramiz. 
               Veb dasturlash, mobil ilovalar va avtomatlashtirish sohasidagi ishonchli hamkoringiz.
@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
                   key={index}
                   href={social.href}
                   className={`p-3 rounded-full hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 ${
-                    isDark ? 'bg-gray-800' : 'bg-gray-700'
+                    isDark ? 'bg-gray-800' : 'bg-gray-200 hover:bg-blue-600'
                   }`}
                   aria-label={social.label}
                 >
