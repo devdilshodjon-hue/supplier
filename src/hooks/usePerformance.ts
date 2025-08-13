@@ -81,23 +81,15 @@ export const usePerformanceOptimization = () => {
 // Performance monitoring hook
 export const usePerformanceMonitoring = () => {
   useEffect(() => {
-    // Monitor Core Web Vitals
-    if ('web-vitals' in window) {
-      import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-        getCLS(console.log);
-        getFID(console.log);
-        getFCP(console.log);
-        getLCP(console.log);
-        getTTFB(console.log);
-      });
-    }
-
-    // Monitor performance entries
+    // Monitor performance entries using native Performance API
     if ('PerformanceObserver' in window) {
       const observer = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry) => {
           if (entry.entryType === 'navigation') {
             console.log('Navigation timing:', entry);
+          }
+          if (entry.entryType === 'paint') {
+            console.log('Paint timing:', entry);
           }
         });
       });
@@ -105,6 +97,13 @@ export const usePerformanceMonitoring = () => {
       observer.observe({ entryTypes: ['navigation', 'paint'] });
 
       return () => observer.disconnect();
+    }
+
+    // Basic performance metrics without external dependency
+    if ('performance' in window && performance.timing) {
+      const timing = performance.timing;
+      const loadTime = timing.loadEventEnd - timing.navigationStart;
+      console.log('Page load time:', loadTime + 'ms');
     }
   }, []);
 };
