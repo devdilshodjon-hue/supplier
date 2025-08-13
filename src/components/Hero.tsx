@@ -84,7 +84,7 @@ const Hero: React.FC = () => {
                style={{ animationDuration: '2s' }} />
         </div>
         
-        <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold text-white mb-8 animate-fade-in-up animation-delay-200" tabIndex={0}>
+        <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-white mb-8 animate-fade-in-up animation-delay-200" tabIndex={0}>
           <span className="inline-block animate-pulse">Biz</span>{' '}
           <span className="inline-block bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent animate-pulse animation-delay-400">
             Yaratamiz
@@ -95,7 +95,7 @@ const Hero: React.FC = () => {
           <span
             aria-live="polite"
             aria-label={`Hozir ko'rsatilayotgan xizmat: ${currentText}`}
-            className="text-xl sm:text-3xl lg:text-5xl font-bold text-blue-200 animate-fade-in-up animation-delay-600"
+            className="text-lg sm:text-2xl lg:text-4xl font-bold text-blue-200 animate-fade-in-up animation-delay-600"
           >
             {currentText}
             <span className="animate-pulse text-white">|</span>
