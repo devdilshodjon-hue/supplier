@@ -211,7 +211,7 @@ const Contact: React.FC = () => {
               </div>
               
               <div className="relative z-10">
-                <h4 className="text-2xl font-bold text-gray-900 mb-6">Nega Supplier IT ni Tanlash Kerak?</h4>
+                <h4 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>Nega Supplier IT ni Tanlash Kerak?</h4>
                 <ul className="space-y-4">
                   {[
                     '5+ yillik tajribaga ega mutaxassis jamoa',
@@ -220,8 +220,8 @@ const Contact: React.FC = () => {
                     '24/7 qo\'llab-quvvatlash va texnik xizmat',
                     'Biznes ehtiyojlaringiz uchun maxsus yechimlar'
                   ].map((benefit, index) => (
-                    <li key={index} className="flex items-center text-gray-700 group">
-                      <CheckCircle className="w-6 h-6 text-green-500 mr-4 flex-shrink-0 group-hover:scale-125 transition-transform duration-300" />
+                    <li key={index} className={`flex items-center group ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
+                      <CheckCircle className="w-6 h-6 text-green-500 mr-4 flex-shrink-0 group-hover:scale-125 transition-transform duration-300" aria-hidden="true" />
                       <span className="group-hover:translate-x-2 transition-transform duration-300">{benefit}</span>
                     </li>
                   ))}
