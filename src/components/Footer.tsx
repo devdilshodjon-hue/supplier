@@ -117,14 +117,14 @@ const Footer: React.FC = () => {
                 <MapPin className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className={`${typography.footerText} ${
-                    isDark ? 'text-gray-400' : 'text-gray-300'
+                    isDark ? 'text-gray-400' : 'text-gray-600'
                   }`}>Toshkent, O'zbekiston</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-blue-400 flex-shrink-0" />
                 <a href="tel:+998995340313" className={`${typography.footerText} transition-colors duration-300 ${
-                  isDark ? 'text-gray-400 hover:text-white' : 'text-gray-300 hover:text-gray-100'
+                  isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-800'
                 }`}>
                   +998 99 534 03 13
                 </a>
@@ -132,7 +132,7 @@ const Footer: React.FC = () => {
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-400 flex-shrink-0" />
                 <a href="mailto:dev.dilshodjon@gmail.com" className={`${typography.footerText} transition-colors duration-300 ${
-                  isDark ? 'text-gray-400 hover:text-white' : 'text-gray-300 hover:text-gray-100'
+                  isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-800'
                 }`}>
                   dev.dilshodjon@gmail.com
                 </a>
