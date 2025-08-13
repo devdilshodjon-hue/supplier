@@ -159,15 +159,27 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Footer */}
-        <div className="border-t border-gray-800 py-8">
+        <div className={`border-t py-8 ${
+          isDark ? 'border-gray-800' : 'border-gray-700'
+        }`}>
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-gray-400 text-sm">
+            <div className={`${typography.footerText} ${
+              isDark ? 'text-gray-400' : 'text-gray-300'
+            }`}>
               © 2024 Supplier IT. All rights reserved. | supplier.uz
             </div>
-            <div className="flex space-x-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-white transition-colors duration-300">Maxfiylik Siyosati</a>
-              <a href="#" className="hover:text-white transition-colors duration-300">Xizmat Shartlari</a>
-              <a href="#" className="hover:text-white transition-colors duration-300">Sayt Xaritasi</a>
+            <div className={`flex space-x-6 ${typography.footerText} ${
+              isDark ? 'text-gray-400' : 'text-gray-300'
+            }`}>
+              <a href="#" className={`transition-colors duration-300 ${
+                isDark ? 'hover:text-white' : 'hover:text-gray-100'
+              }`}>Maxfiylik Siyosati</a>
+              <a href="#" className={`transition-colors duration-300 ${
+                isDark ? 'hover:text-white' : 'hover:text-gray-100'
+              }`}>Xizmat Shartlari</a>
+              <a href="#" className={`transition-colors duration-300 ${
+                isDark ? 'hover:text-white' : 'hover:text-gray-100'
+              }`}>Sayt Xaritasi</a>
             </div>
           </div>
         </div>
