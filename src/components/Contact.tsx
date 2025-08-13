@@ -162,13 +162,17 @@ const Contact: React.FC = () => {
               ))}
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 relative overflow-hidden">
+            <div className={`rounded-3xl p-8 relative overflow-hidden ${
+              isDark ? 'bg-gradient-to-br from-gray-800 to-gray-700' : 'bg-gradient-to-br from-blue-50 to-purple-50'
+            }`}>
               {/* Animated background elements */}
               <div className="absolute inset-0">
                 {[...Array(10)].map((_, i) => (
                   <div
                     key={i}
-                    className="absolute w-2 h-2 bg-blue-300 rounded-full opacity-30 animate-float"
+                    className={`absolute w-2 h-2 rounded-full opacity-30 animate-float ${
+                      isDark ? 'bg-blue-500' : 'bg-blue-300'
+                    }`}
                     style={{
                       left: `${Math.random() * 100}%`,
                       top: `${Math.random() * 100}%`,
